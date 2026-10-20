@@ -182,5 +182,32 @@
     window.addEventListener("resize", syncTapHintPosition);
   }
 
+  // ---------- Frame 1: size the cover photo to exactly fill the space left
+  // over above the text block, so there's zero wasted whitespace at any
+  // device height: photo = frame height - text block - the space reserved
+  // below the text for the tap-hint. "Frame height" is the cover frame's
+  // own rendered height (screens.getBoundingClientRect(), same element
+  // used elsewhere in this file for viewportWidth), which already excludes
+  // the footer, since the footer is a sibling below .screens, not inside
+  // the frame. The reserved space below the text is the tap-hint's own
+  // distance up from the frame's bottom edge (footer height + the 12px
+  // clearance above the footer + the tap-hint's own line height) plus 8px
+  // of air, so the tap-hint never overlaps the subtitle's last line. ----------
+  const coverPhoto = document.querySelector(".cover-photo");
+  const coverText = document.querySelector(".cover-text");
+
+  function syncCoverPhotoHeight() {
+    if (!coverPhoto || !coverText || !footer) return;
+    const frameHeight = screens.getBoundingClientRect().height;
+    const tapHintReserve = tapHint ? footer.offsetHeight + 12 + tapHint.offsetHeight + 8 : footer.offsetHeight + 24;
+    const available = frameHeight - coverText.offsetHeight - tapHintReserve;
+    coverPhoto.style.height = Math.max(0, available) + "px";
+  }
+
+  if (coverPhoto && coverText && footer) {
+    syncCoverPhotoHeight();
+    window.addEventListener("resize", syncCoverPhotoHeight);
+  }
+
   render(false);
 })();
