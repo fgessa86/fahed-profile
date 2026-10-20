@@ -197,12 +197,13 @@ body {
   font-size: 1.15rem;
   line-height: 1.55;
   color: var(--charcoal);
-  margin: 0;
+  margin: 0 0 8px;
   max-width: 340px;
 }
 
 .tap-hint {
   position: absolute;
+  margin-top: 0;
   bottom: 80px; /* fallback; app.js sets this precisely to footer height + 12px */
   right: 24px;
   font-size: 0.78rem;
@@ -538,7 +539,6 @@ body {
 
 @media (max-height: 720px) {
   .frame:not(.frame-cover) { padding-top: max(50px, calc(env(safe-area-inset-top) + 42px)); }
-  .cover-photo { height: 50vh; flex-basis: 50vh; }
   .name { font-size: clamp(1.9rem, 8.5vw, 2.5rem); margin-bottom: 10px; }
   .subtitle { font-size: 1.02rem; }
   .cover-text { padding-top: 16px; }

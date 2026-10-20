@@ -207,6 +207,12 @@
   if (coverPhoto && coverText && footer) {
     syncCoverPhotoHeight();
     window.addEventListener("resize", syncCoverPhotoHeight);
+    // The name/subtitle use webfonts loaded with font-display: swap, so the
+    // initial measurement can be taken against fallback-font metrics; redo
+    // it once the real fonts are in so the reserved gap stays exact.
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(syncCoverPhotoHeight);
+    }
   }
 
   render(false);
