@@ -48,6 +48,7 @@
   function goTo(index) {
     current = clamp(index, 0, total - 1);
     render(true);
+    if (current === mapFrameIndex) animateMapPins();
   }
 
   function next() {
@@ -155,6 +156,23 @@
       if (!wasActive) pin.classList.add("pin-active");
     });
   });
+
+  // ---------- Map pins: drop in one by one, in a fixed order, with a 0.4s
+  // stagger, the first time the map frame becomes active. Runs once; never
+  // repeats on later visits to the frame. ----------
+  const mapFrameIndex = frames.findIndex((f) => f.classList.contains("frame-map"));
+  const MAP_PIN_ORDER = ["New York", "Kuwait City", "Riyadh", "San Francisco", "Mexico City", "Santiago"];
+  let mapPinsAnimated = false;
+
+  function animateMapPins() {
+    if (mapPinsAnimated) return;
+    mapPinsAnimated = true;
+    MAP_PIN_ORDER.forEach((name, i) => {
+      const pin = document.querySelector(`.map-pin[data-name="${name}"]`);
+      if (!pin) return;
+      setTimeout(() => pin.classList.add("pin-dropped"), i * 400);
+    });
+  }
 
   // ---------- Logo fallback: if a card's logo image fails to load, drop the
   // image slot entirely so the caption/text stands alone rather than showing

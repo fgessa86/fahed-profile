@@ -229,6 +229,12 @@ body {
 /* ---------- Frame 2: map ---------- */
 .frame-map {
   justify-content: flex-start;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.frame-map-header {
+  padding: 0 28px;
 }
 
 .map-intro {
@@ -238,16 +244,10 @@ body {
   color: var(--ink);
 }
 
-.map-cities {
-  margin: 4px 0 0;
-  font-size: 1rem;
-  line-height: 1.4;
-  color: var(--charcoal);
-}
-
 .map-wrap {
   flex: 1 1 auto;
   min-height: 0;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -283,6 +283,8 @@ body {
   transition: transform 0.15s ease;
   transform-box: fill-box;
   transform-origin: center;
+  opacity: 0;
+  translate: 0 -16px;
 }
 
 .map-pin .pin-label {
@@ -291,8 +293,27 @@ body {
   font-size: 7.5px;
   fill: var(--navy);
   opacity: 0;
-  transition: opacity 0.15s ease;
+  transition: opacity 0.3s ease;
   pointer-events: none;
+}
+
+@keyframes pin-drop {
+  from {
+    opacity: 0;
+    translate: 0 -16px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.map-pin.pin-dropped .pin-dot {
+  animation: pin-drop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.map-pin.pin-dropped .pin-label {
+  opacity: 1;
 }
 
 .map-pin:hover .pin-dot,
