@@ -237,6 +237,13 @@ body {
   padding: 0 28px;
 }
 
+.map-subtitle {
+  margin: 8px 0 0;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: var(--charcoal);
+}
+
 .map-intro {
   margin: 8px 0 0;
   font-size: 1.15rem;
@@ -437,7 +444,29 @@ body {
 .word-amber { color: #e67e22; }
 .word-red { color: var(--pin-accent); }
 
-/* ---------- Frame 5: credentials ---------- */
+/* ---------- Frame 5: let's work together ---------- */
+.frame-work {
+  justify-content: flex-start;
+}
+
+.work-tagline {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--navy);
+  font-size: 1.15rem;
+  line-height: 1.4;
+  margin: 10px 0 0;
+}
+
+.work-body {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--charcoal);
+  margin: 16px 0 0;
+}
+
+/* ---------- Frame 6: credentials ---------- */
 .frame-last {
   justify-content: flex-start;
 }
