@@ -203,7 +203,7 @@ body {
 
 .tap-hint {
   position: absolute;
-  bottom: 80px;
+  bottom: 80px; /* fallback; app.js sets this precisely to footer height + 12px */
   right: 24px;
   font-size: 0.78rem;
   font-weight: 400;

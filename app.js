@@ -166,5 +166,21 @@
     });
   });
 
+  // ---------- Frame 1: keep "Tap right to continue" pinned just above the
+  // footer by measuring the footer's actual rendered height, rather than a
+  // guessed fixed offset, so it never overlaps the footer at any viewport
+  // size or safe-area inset. ----------
+  const tapHint = document.getElementById("tap-hint");
+
+  function syncTapHintPosition() {
+    if (!tapHint || !footer) return;
+    tapHint.style.bottom = footer.offsetHeight + 12 + "px";
+  }
+
+  if (tapHint && footer) {
+    syncTapHintPosition();
+    window.addEventListener("resize", syncTapHintPosition);
+  }
+
   render(false);
 })();
