@@ -156,8 +156,8 @@ body {
 .cover-photo {
   position: relative;
   width: 100%;
-  height: 66vh;
-  flex: 0 0 66vh;
+  height: 72vh;
+  flex: 0 0 72vh;
   overflow: hidden;
   background: #ddd4c4;
 }
