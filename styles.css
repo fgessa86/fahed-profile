@@ -2,6 +2,7 @@
   --cream: #faf7f2;
   --ink: #1a1a1a;
   --navy: #15284b;
+  --pin-accent: #c0392b;
   --charcoal: rgba(26, 26, 26, 0.64);
   --charcoal-dim: rgba(26, 26, 26, 0.46);
   --line: rgba(21, 40, 75, 0.14);
@@ -45,7 +46,41 @@ body {
   margin: 0 auto;
   overflow: hidden;
   background: var(--cream);
+  display: flex;
+  flex-direction: column;
+  isolation: isolate;
+}
+
+.screens {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
   touch-action: pan-y;
+}
+
+/* ---------- Footer (static, every frame) ---------- */
+.site-footer {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  background: var(--cream);
+  border-top: 1px solid var(--line);
+  padding: 13px 16px max(13px, env(safe-area-inset-bottom));
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy);
+  opacity: 0.82;
+}
+
+.footer-link:active {
+  opacity: 1;
 }
 
 /* ---------- Progress bar ---------- */
@@ -138,7 +173,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 20%;
   display: block;
 }
 
@@ -201,10 +236,17 @@ body {
 }
 
 .map-intro {
-  margin: 10px 0 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
+  margin: 8px 0 0;
+  font-size: 1.15rem;
+  line-height: 1.4;
   color: var(--ink);
+}
+
+.map-cities {
+  margin: 4px 0 0;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--charcoal);
 }
 
 .map-wrap {
@@ -213,7 +255,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 18px;
+  margin-top: 10px;
 }
 
 .world-map {
@@ -239,7 +281,9 @@ body {
 }
 
 .map-pin .pin-dot {
-  fill: var(--navy);
+  fill: var(--pin-accent);
+  stroke: var(--cream);
+  stroke-width: 0.6;
   transition: transform 0.15s ease;
   transform-box: fill-box;
   transform-origin: center;
@@ -272,14 +316,11 @@ body {
 
 .proof-cards {
   list-style: none;
-  margin: 0;
+  margin: 18px 0 0;
   padding: 0;
-  flex: 1 1 auto;
-  min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin-top: 8px;
+  gap: 20px;
 }
 
 .proof-card {
@@ -313,9 +354,13 @@ body {
 }
 
 /* ---------- Frame 4: stat list ---------- */
+.frame-fluent {
+  justify-content: flex-start;
+}
+
 .stat-list {
   list-style: none;
-  margin: 0;
+  margin: 28px 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;

@@ -1,14 +1,14 @@
 (function () {
   "use strict";
 
-  const viewport = document.getElementById("viewport");
+  const screens = document.getElementById("screens");
   const track = document.getElementById("track");
   const frames = Array.from(track.children);
   const segments = Array.from(document.getElementById("progress").children);
   const total = frames.length;
 
   let current = 0;
-  let viewportWidth = viewport.getBoundingClientRect().width;
+  let viewportWidth = screens.getBoundingClientRect().width;
 
   // Drag state
   let dragging = false;
@@ -36,7 +36,7 @@
   }
 
   function render(withTransition) {
-    viewportWidth = viewport.getBoundingClientRect().width;
+    viewportWidth = screens.getBoundingClientRect().width;
     setTrackTransform(-current * viewportWidth, withTransition);
     updateProgress();
   }
@@ -64,7 +64,7 @@
     startY = e.clientY;
     startTime = Date.now();
     deltaX = 0;
-    viewportWidth = viewport.getBoundingClientRect().width;
+    viewportWidth = screens.getBoundingClientRect().width;
   }
 
   function onPointerMove(e) {
@@ -121,7 +121,7 @@
 
     // Negligible movement: split tap. Right half of the VIEWPORT -> forward, left half -> back.
     if (elapsed < 400) {
-      const rect = viewport.getBoundingClientRect();
+      const rect = screens.getBoundingClientRect();
       const midpoint = rect.left + rect.width / 2;
       if (e.clientX >= midpoint) {
         next();
@@ -131,8 +131,8 @@
     }
   }
 
-  viewport.addEventListener("pointerdown", onPointerDown);
-  viewport.addEventListener("pointermove", onPointerMove, { passive: false });
+  screens.addEventListener("pointerdown", onPointerDown);
+  screens.addEventListener("pointermove", onPointerMove, { passive: false });
   window.addEventListener("pointerup", onPointerUp);
   window.addEventListener("pointercancel", () => {
     dragging = false;
@@ -149,6 +149,16 @@
       const wasActive = pin.classList.contains("pin-active");
       pins.forEach((p) => p.classList.remove("pin-active"));
       if (!wasActive) pin.classList.add("pin-active");
+    });
+  });
+
+  // ---------- Logo fallback: if a card's logo image fails to load, drop the
+  // image slot entirely so the caption/text stands alone rather than showing
+  // a broken-image icon or empty box. ----------
+  document.querySelectorAll(".proof-logo img, .cred-logo img").forEach((img) => {
+    img.addEventListener("error", () => {
+      const slot = img.closest(".proof-logo, .cred-logo");
+      if (slot) slot.remove();
     });
   });
 
