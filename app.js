@@ -166,29 +166,5 @@
     });
   });
 
-  // ---------- Frame 4: size the Clinical/Commercial/Capital word-stack to
-  // exactly match the rendered width of "Fluent Across", measured after
-  // fonts have actually loaded (clamp()-based font-size + Playfair Display
-  // webfont loading both affect the true width, so this can't be hardcoded).
-  const fluentTitle = document.getElementById("fluent-title");
-  const justifyStack = document.getElementById("justify-stack");
-
-  function syncJustifyStackWidth() {
-    if (!fluentTitle || !justifyStack) return;
-    requestAnimationFrame(() => {
-      const w = fluentTitle.getBoundingClientRect().width;
-      if (w > 0) justifyStack.style.width = w + "px";
-    });
-  }
-
-  if (fluentTitle && justifyStack) {
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(syncJustifyStackWidth);
-    } else {
-      syncJustifyStackWidth();
-    }
-    window.addEventListener("resize", syncJustifyStackWidth);
-  }
-
   render(false);
 })();
