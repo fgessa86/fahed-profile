@@ -389,30 +389,6 @@ body {
   background: var(--navy);
 }
 
-.justify-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 10px;
-  width: 100%;
-}
-
-.justify-word {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  width: 100%;
-  font-family: var(--serif);
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 1.1;
-  font-size: clamp(2rem, 9.2vw, 2.9rem);
-}
-
-.justify-word span {
-  display: inline-block;
-}
-
 .word-blue { color: #2e86c1; }
 .word-amber { color: #e67e22; }
 .word-red { color: var(--pin-accent); }
@@ -525,7 +501,6 @@ body {
   .cover-photo { height: 58%; flex-basis: 58%; }
   .name { font-size: clamp(1.9rem, 8.5vw, 2.5rem); }
   .hero { font-size: clamp(2.3rem, 7.4vw, 3rem); }
-  .justify-word { font-size: clamp(1.7rem, 8vw, 2.3rem); }
   .map-intro,
   .proof-caption,
   .stat-list li { font-size: 1.05rem; }
