@@ -457,6 +457,14 @@ body {
   justify-content: flex-start;
 }
 
+.work-header {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+}
+
 .work-tagline {
   font-family: var(--serif);
   font-style: italic;
@@ -468,7 +476,7 @@ body {
 }
 
 .work-body {
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   line-height: 1.7;
   color: var(--charcoal);
   margin: 16px 0 0;
