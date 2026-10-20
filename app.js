@@ -4,9 +4,36 @@
   const screens = document.getElementById("screens");
   const track = document.getElementById("track");
   const footer = document.querySelector(".site-footer");
+  const viewportEl = document.getElementById("viewport");
   const frames = Array.from(track.children);
   const segments = Array.from(document.getElementById("progress").children);
   const total = frames.length;
+
+  // ---------- Keep .viewport's rendered height exactly matched to the real
+  // visible area on mobile. CSS's 100dvh is the right idea but has a known
+  // real-world gap on iOS Safari: it can report the browser-chrome-visible
+  // (larger) viewport value until a scroll event forces a recalculation,
+  // and this is a swipe-only app that never scrolls the page, so that
+  // recalculation may never fire, leaving the URL/tab bar overlapping the
+  // bottom of the content on a fresh load. window.visualViewport.height is
+  // the one API that always reports the true visible area and fires its
+  // own resize event when the browser chrome shows or hides, so it drives
+  // .viewport's height on mobile. Desktop keeps the fixed phone-frame size
+  // the stylesheet's own media query sets, so this only applies below that
+  // breakpoint and clears the inline override above it. ----------
+  const MOBILE_BREAKPOINT = 680;
+
+  function syncViewportHeight() {
+    if (!viewportEl) return;
+    if (window.innerWidth > MOBILE_BREAKPOINT) {
+      viewportEl.style.height = "";
+      return;
+    }
+    const vv = window.visualViewport;
+    viewportEl.style.height = (vv ? vv.height : window.innerHeight) + "px";
+  }
+
+  syncViewportHeight();
 
   let current = 0;
   let viewportWidth = screens.getBoundingClientRect().width;
@@ -144,8 +171,6 @@
     render(true);
   });
 
-  window.addEventListener("resize", () => render(false));
-
   // ---------- Map pins: tap or hover shows the city label ----------
   const pins = document.querySelectorAll(".map-pin");
   pins.forEach((pin) => {
@@ -197,7 +222,6 @@
 
   if (tapHint && footer) {
     syncTapHintPosition();
-    window.addEventListener("resize", syncTapHintPosition);
   }
 
   // ---------- Frame 1: size the cover photo to exactly fill the space left
@@ -224,13 +248,34 @@
 
   if (coverPhoto && coverText && footer) {
     syncCoverPhotoHeight();
-    window.addEventListener("resize", syncCoverPhotoHeight);
     // The name/subtitle use webfonts loaded with font-display: swap, so the
     // initial measurement can be taken against fallback-font metrics; redo
     // it once the real fonts are in so the reserved gap stays exact.
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(syncCoverPhotoHeight);
     }
+  }
+
+  // ---------- Single resize/visual-viewport handler for everything that
+  // depends on the viewport's actual rendered size, in dependency order:
+  // the viewport height itself first, then the frame-slide position, then
+  // the two Frame 1 measurements that read .screens/.footer's resulting
+  // size. window.visualViewport fires its own "resize" event when the
+  // browser chrome shows/hides even without a matching window "resize"
+  // (window.innerHeight reflects the layout viewport, not the visual one),
+  // which is exactly the case 100dvh alone misses on this non-scrolling
+  // page, so it's listened to separately rather than relying on "resize"
+  // alone to catch it. ----------
+  function handleViewportChange() {
+    syncViewportHeight();
+    render(false);
+    syncTapHintPosition();
+    syncCoverPhotoHeight();
+  }
+
+  window.addEventListener("resize", handleViewportChange);
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener("resize", handleViewportChange);
   }
 
   render(false);
