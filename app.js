@@ -199,6 +199,58 @@
     });
   }
 
+  // ---------- Map pins: size each label's white pill background to the
+  // actual rendered text, converting the requested CSS-pixel values
+  // (10px/3px padding, 12px corner radius, 1px border) into the SVG's own
+  // user-unit scale. This map doesn't render at 1 user unit = 1 CSS px
+  // (the viewBox is 360 units wide, scaled to fill whatever width the
+  // frame has), so a hardcoded unit value would drift from the intended
+  // pixel size as the viewport changes; this keeps it exact at every
+  // width. Each label keeps its existing position (above/below its pin,
+  // left/middle/right-anchored per pin) rather than a uniform offset to
+  // one side: Riyadh and Kuwait City sit close to the map's right edge
+  // and close to each other, and a uniform right offset was tried and
+  // measurably clipped both off the frame's edge and collided with each
+  // other; it's purely a contrast problem (thin navy map lines under
+  // plain text), not an overlap problem, so the pill goes behind the
+  // existing positions rather than repositioning them. Re-run on resize
+  // (the scale changes) and once webfonts are loaded (label text uses
+  // Inter, loaded with font-display: swap, so its metrics can shift
+  // after the swap, same reasoning as the Frame 1 cover-photo sync). ----------
+  const worldMap = document.querySelector(".world-map");
+
+  function syncPinLabelPills() {
+    if (!worldMap) return;
+    const svgWidth = worldMap.getBoundingClientRect().width;
+    if (!svgWidth) return;
+    const scale = svgWidth / 360; // CSS px per 1 SVG user unit
+    const padX = 10 / scale;
+    const padY = 3 / scale;
+    const radius = 12 / scale;
+    const strokeWidth = 1 / scale;
+
+    document.querySelectorAll(".map-pin").forEach((pin) => {
+      const text = pin.querySelector(".pin-label");
+      const bg = pin.querySelector(".pin-label-bg");
+      if (!text || !bg) return;
+      bg.setAttribute("stroke-width", strokeWidth);
+      const box = text.getBBox();
+      bg.setAttribute("x", box.x - padX);
+      bg.setAttribute("y", box.y - padY);
+      bg.setAttribute("width", box.width + padX * 2);
+      bg.setAttribute("height", box.height + padY * 2);
+      bg.setAttribute("rx", radius);
+      bg.setAttribute("ry", radius);
+    });
+  }
+
+  if (worldMap) {
+    syncPinLabelPills();
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(syncPinLabelPills);
+    }
+  }
+
   // ---------- Logo fallback: if a card's logo image fails to load, drop the
   // image slot entirely so the caption/text stands alone rather than showing
   // a broken-image icon or empty box. ----------
@@ -271,6 +323,7 @@
     render(false);
     syncTapHintPosition();
     syncCoverPhotoHeight();
+    syncPinLabelPills();
   }
 
   window.addEventListener("resize", handleViewportChange);
