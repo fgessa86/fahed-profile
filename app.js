@@ -29,9 +29,6 @@
       seg.classList.toggle("done", i < current);
       seg.classList.toggle("active", i === current);
     });
-    if (footer) {
-      footer.classList.toggle("footer-hidden", frames[current].classList.contains("frame-last"));
-    }
   }
 
   function setTrackTransform(px, withTransition) {

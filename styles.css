@@ -83,11 +83,6 @@ body {
   opacity: 1;
 }
 
-.site-footer.footer-hidden {
-  visibility: hidden;
-  pointer-events: none;
-}
-
 /* ---------- Progress bar ---------- */
 .progress {
   position: absolute;
@@ -258,7 +253,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 24px;
 }
 
 .world-map {
