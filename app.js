@@ -141,5 +141,16 @@
 
   window.addEventListener("resize", () => render(false));
 
+  // ---------- Map pins: tap or hover shows the city label ----------
+  const pins = document.querySelectorAll(".map-pin");
+  pins.forEach((pin) => {
+    pin.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const wasActive = pin.classList.contains("pin-active");
+      pins.forEach((p) => p.classList.remove("pin-active"));
+      if (!wasActive) pin.classList.add("pin-active");
+    });
+  });
+
   render(false);
 })();
