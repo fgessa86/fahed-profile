@@ -5,6 +5,8 @@
   const track = document.getElementById("track");
   const frames = Array.from(track.children);
   const segments = Array.from(document.getElementById("progress").children);
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
   const total = frames.length;
 
   let current = 0;
@@ -28,6 +30,8 @@
       seg.classList.toggle("done", i < current);
       seg.classList.toggle("active", i === current);
     });
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
   }
 
   function setTrackTransform(px, withTransition) {
@@ -54,6 +58,9 @@
     goTo(current - 1);
   }
 
+  prevBtn.addEventListener("click", prev);
+  nextBtn.addEventListener("click", next);
+
   // ---------- Pointer handling (tap + swipe, unified) ----------
   function onPointerDown(e) {
     if (e.pointerType === "mouse" && e.button !== 0) return;
@@ -78,7 +85,7 @@
       }
     }
 
-    if (axisLocked === "y") return; // let vertical scroll/gesture pass
+    if (axisLocked === "y") return; // let vertical gesture pass
 
     if (axisLocked === "x") {
       e.preventDefault();
@@ -103,8 +110,8 @@
     const elapsed = Date.now() - startTime;
 
     if (axisLocked === "x") {
-      const threshold = viewportWidth * 0.18;
-      const fast = Math.abs(deltaX) > 60 && elapsed < 250;
+      const threshold = viewportWidth * 0.16;
+      const fast = Math.abs(deltaX) > 55 && elapsed < 250;
       if (deltaX < -threshold || (fast && deltaX < 0)) {
         next();
       } else if (deltaX > threshold || (fast && deltaX > 0)) {
@@ -119,15 +126,9 @@
       return;
     }
 
-    // Treated as a tap (negligible movement)
+    // Negligible movement: treated as a tap anywhere on the frame -> advance
     if (elapsed < 400) {
-      const rect = viewport.getBoundingClientRect();
-      const relX = (e.clientX - rect.left) / rect.width;
-      if (relX < 0.28) {
-        prev();
-      } else {
-        next();
-      }
+      next();
     }
   }
 
@@ -144,25 +145,6 @@
     if (e.key === "ArrowRight" || e.key === " ") next();
     if (e.key === "ArrowLeft") prev();
   });
-
-  // ---------- Desktop nav arrows ----------
-  function buildArrows() {
-    const prevBtn = document.createElement("button");
-    prevBtn.className = "nav-arrow nav-prev";
-    prevBtn.setAttribute("aria-label", "Previous");
-    prevBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>';
-    prevBtn.addEventListener("click", prev);
-
-    const nextBtn = document.createElement("button");
-    nextBtn.className = "nav-arrow nav-next";
-    nextBtn.setAttribute("aria-label", "Next");
-    nextBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>';
-    nextBtn.addEventListener("click", next);
-
-    viewport.appendChild(prevBtn);
-    viewport.appendChild(nextBtn);
-  }
-  buildArrows();
 
   window.addEventListener("resize", () => render(false));
 
