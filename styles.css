@@ -373,7 +373,7 @@ body {
   background: var(--navy);
 }
 
-.word-navy { color: var(--navy); }
+.word-blue { color: #2e86c1; }
 .word-amber { color: #e67e22; }
 .word-red { color: var(--pin-accent); }
 
