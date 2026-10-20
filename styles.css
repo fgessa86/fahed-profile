@@ -318,8 +318,9 @@ body {
 
 .proof-logo {
   flex: 0 0 auto;
-  width: 84px;
-  height: 40px;
+  width: auto;
+  max-width: 150px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -329,12 +330,27 @@ body {
   max-width: 100%;
   max-height: 100%;
   width: auto;
-  height: auto;
+  height: 70px;
   object-fit: contain;
   display: block;
 }
 
+.proof-logo-taiba {
+  width: 70px;
+}
+
+.proof-logo-taiba img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  min-height: 70px;
+  max-height: none;
+  object-fit: contain;
+}
+
 .proof-caption {
+  flex: 1 1 auto;
+  min-width: 0;
   font-size: 1.05rem;
   line-height: 1.5;
   color: var(--charcoal);
