@@ -41,7 +41,8 @@ body {
   position: relative;
   width: 100%;
   height: 100dvh;
-  max-width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
   overflow: hidden;
   background: var(--cream);
   touch-action: pan-y;
@@ -93,30 +94,11 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 0 28px;
+  justify-content: space-between;
+  padding: max(56px, calc(env(safe-area-inset-top) + 48px)) 28px max(28px, env(safe-area-inset-bottom));
   position: relative;
   overflow: hidden;
   user-select: none;
-}
-
-.frame:not(.frame-cover)::before {
-  content: "";
-  flex: 0 0 auto;
-  height: 9vh;
-  min-height: 48px;
-}
-
-.frame:not(.frame-cover)::after {
-  content: "";
-  flex: 1 1 auto;
-}
-
-.frame-inner {
-  width: 100%;
-  max-width: 420px;
-  margin: 0 auto;
-  text-align: left;
 }
 
 /* ---------- Frame 1: Cover ---------- */
@@ -133,7 +115,7 @@ body {
   background: rgba(250, 247, 242, 0.88);
   color: var(--navy);
   text-decoration: none;
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -156,7 +138,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 18%;
+  object-position: center top;
   display: block;
 }
 
@@ -179,67 +161,56 @@ body {
   color: var(--navy);
   font-size: clamp(2.1rem, 9.5vw, 2.9rem);
   line-height: 1.05;
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   letter-spacing: -0.01em;
 }
 
 .subtitle {
-  font-size: 0.96rem;
+  font-size: 1.15rem;
   line-height: 1.55;
   color: var(--charcoal);
   margin: 0;
-  max-width: 320px;
+  max-width: 340px;
 }
 
 .tap-hint {
   position: absolute;
   bottom: max(26px, env(safe-area-inset-bottom));
   left: 28px;
-  font-size: 0.74rem;
+  font-size: 0.78rem;
   letter-spacing: 0.03em;
-  color: var(--charcoal-dim);
+  color: var(--navy);
+  opacity: 0.55;
   pointer-events: none;
 }
 
-/* ---------- Hero section labels (frames 2-4) ---------- */
+/* ---------- Hero section titles (frames 2-4) ---------- */
 .hero {
   font-family: var(--serif);
   font-weight: 700;
   color: var(--navy);
-  font-size: clamp(2.5rem, 12vw, 3.5rem);
-  line-height: 1.03;
-  margin: 0 0 26px;
+  font-size: clamp(2.8rem, 8vw, 3.5rem);
+  line-height: 1.06;
+  margin: 0;
   letter-spacing: -0.01em;
-}
-
-.hero-tight {
-  font-size: clamp(2rem, 9vw, 2.9rem);
-  line-height: 1.08;
-}
-
-.hero-sub {
-  display: block;
-  font-size: 0.56em;
-  font-weight: 600;
-  margin-top: 6px;
 }
 
 .body-lines {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .body-lines p {
   margin: 0;
-  font-size: 1rem;
-  line-height: 1.55;
+  font-size: 1.25rem;
+  line-height: 1.7;
   color: var(--ink);
 }
 
 .body-lines p + p {
   color: var(--charcoal);
-  font-size: 0.92rem;
+  font-size: 1.15rem;
 }
 
 /* ---------- Frame 3: proof points ---------- */
@@ -249,14 +220,14 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .proof-list li {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding-top: 12px;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--charcoal);
+  padding-top: 14px;
   border-top: 1px solid var(--line);
 }
 
@@ -268,13 +239,6 @@ body {
 .proof-list .lead {
   font-weight: 700;
   color: var(--navy);
-  font-size: 0.92rem;
-}
-
-.proof-list .desc {
-  font-size: 0.86rem;
-  line-height: 1.5;
-  color: var(--charcoal);
 }
 
 /* ---------- Frame 4: stat list ---------- */
@@ -284,14 +248,14 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 16px;
 }
 
 .stat-list li {
-  font-size: 0.92rem;
-  line-height: 1.48;
+  font-size: 1.15rem;
+  line-height: 1.7;
   color: var(--ink);
-  padding-left: 16px;
+  padding-left: 18px;
   position: relative;
 }
 
@@ -299,46 +263,41 @@ body {
   content: "";
   position: absolute;
   left: 0;
-  top: 0.5em;
-  width: 5px;
-  height: 5px;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--navy);
 }
 
 /* ---------- Frame 5: credentials ---------- */
-.frame-inner-cred {
-  width: 100%;
-  max-width: 420px;
-}
-
 .label-lg {
   font-family: var(--serif);
   font-weight: 700;
   color: var(--navy);
-  font-size: clamp(1.6rem, 6.4vw, 2.1rem);
-  margin: 0 0 18px;
+  font-size: clamp(2rem, 7.5vw, 2.5rem);
+  margin: 0;
 }
 
 .cred-cards {
   list-style: none;
-  margin: 0 0 22px;
+  margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .cred-card {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 13px;
 }
 
 .cred-logo {
   flex: 0 0 auto;
-  width: 64px;
-  height: 42px;
+  width: 62px;
+  height: 40px;
   border-radius: 8px;
   border: 1px solid var(--line);
   background: #fff;
@@ -357,27 +316,27 @@ body {
 .cred-text {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
   min-width: 0;
 }
 
 .cred-degree {
   font-weight: 700;
   color: var(--navy);
-  font-size: 0.88rem;
+  font-size: 1.1rem;
   line-height: 1.3;
 }
 
 .cred-program {
-  font-size: 0.74rem;
-  line-height: 1.3;
+  font-size: 0.9rem;
+  line-height: 1.35;
   color: var(--charcoal-dim);
 }
 
 .contact-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 16px;
+  gap: 10px 18px;
   padding-top: 16px;
   border-top: 1px solid var(--line);
 }
@@ -388,46 +347,13 @@ body {
   gap: 6px;
   color: var(--navy);
   text-decoration: none;
-  font-size: 0.82rem;
+  font-size: 0.92rem;
   font-weight: 600;
 }
 
 .contact-link svg {
   flex-shrink: 0;
   opacity: 0.85;
-}
-
-/* ---------- Edge nav arrows ---------- */
-.edge-arrow {
-  position: absolute;
-  bottom: max(20px, env(safe-area-inset-bottom));
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.55);
-  color: var(--navy);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 28;
-  opacity: 0.55;
-  transition: opacity 0.2s ease;
-  padding: 0;
-}
-
-.edge-arrow:hover,
-.edge-arrow:active {
-  opacity: 0.95;
-}
-
-.edge-prev { left: 16px; }
-.edge-next { right: 16px; }
-
-.edge-arrow[disabled] {
-  opacity: 0.15;
-  pointer-events: none;
 }
 
 /* ---------- Desktop phone-frame presentation ---------- */
@@ -438,7 +364,7 @@ body {
   }
 
   .viewport {
-    width: 412px;
+    width: 420px;
     height: 890px;
     max-height: 92dvh;
     border-radius: 44px;
@@ -447,9 +373,12 @@ body {
   }
 }
 
-@media (max-height: 700px) {
+@media (max-height: 720px) {
+  .frame { padding-top: max(50px, calc(env(safe-area-inset-top) + 42px)); }
   .cover-photo { height: 46%; flex-basis: 46%; }
   .name { font-size: clamp(1.9rem, 8.5vw, 2.5rem); }
-  .hero { font-size: clamp(2.1rem, 10vw, 2.9rem); margin-bottom: 18px; }
-  .hero-tight { font-size: clamp(1.7rem, 7.6vw, 2.3rem); }
+  .hero { font-size: clamp(2.3rem, 7.4vw, 3rem); }
+  .body-lines p,
+  .proof-list li,
+  .stat-list li { font-size: 1.05rem; }
 }

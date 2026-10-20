@@ -5,8 +5,6 @@
   const track = document.getElementById("track");
   const frames = Array.from(track.children);
   const segments = Array.from(document.getElementById("progress").children);
-  const prevBtn = document.getElementById("prevBtn");
-  const nextBtn = document.getElementById("nextBtn");
   const total = frames.length;
 
   let current = 0;
@@ -30,8 +28,6 @@
       seg.classList.toggle("done", i < current);
       seg.classList.toggle("active", i === current);
     });
-    prevBtn.disabled = current === 0;
-    nextBtn.disabled = current === total - 1;
   }
 
   function setTrackTransform(px, withTransition) {
@@ -58,10 +54,7 @@
     goTo(current - 1);
   }
 
-  prevBtn.addEventListener("click", prev);
-  nextBtn.addEventListener("click", next);
-
-  // ---------- Pointer handling (tap + swipe, unified) ----------
+  // ---------- Pointer handling: split tap (left = back, right = forward) + swipe ----------
   function onPointerDown(e) {
     if (e.pointerType === "mouse" && e.button !== 0) return;
     interactiveTarget = !!e.target.closest("a, button, .no-advance");
@@ -126,9 +119,15 @@
       return;
     }
 
-    // Negligible movement: treated as a tap anywhere on the frame -> advance
+    // Negligible movement: split tap. Right half of the VIEWPORT -> forward, left half -> back.
     if (elapsed < 400) {
-      next();
+      const rect = viewport.getBoundingClientRect();
+      const midpoint = rect.left + rect.width / 2;
+      if (e.clientX >= midpoint) {
+        next();
+      } else {
+        prev();
+      }
     }
   }
 
@@ -138,12 +137,6 @@
   window.addEventListener("pointercancel", () => {
     dragging = false;
     render(true);
-  });
-
-  // ---------- Keyboard (desktop) ----------
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowRight" || e.key === " ") next();
-    if (e.key === "ArrowLeft") prev();
   });
 
   window.addEventListener("resize", () => render(false));
