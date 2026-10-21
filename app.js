@@ -75,7 +75,6 @@
   function goTo(index) {
     current = clamp(index, 0, total - 1);
     render(true);
-    if (current === mapFrameIndex) animateMapPins();
   }
 
   function next() {
@@ -171,95 +170,50 @@
     render(true);
   });
 
-  // ---------- Map pins: tap or hover shows the city label ----------
-  const pins = document.querySelectorAll(".map-pin");
-  pins.forEach((pin) => {
-    pin.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const wasActive = pin.classList.contains("pin-active");
-      pins.forEach((p) => p.classList.remove("pin-active"));
-      if (!wasActive) pin.classList.add("pin-active");
-    });
-  });
-
-  // ---------- Map pins: drop in one by one, in a fixed order, with a 0.4s
-  // stagger, the first time the map frame becomes active. Runs once; never
-  // repeats on later visits to the frame. ----------
-  const mapFrameIndex = frames.findIndex((f) => f.classList.contains("frame-map"));
-  const MAP_PIN_ORDER = ["New York", "Kuwait City", "Riyadh", "San Francisco", "Mexico City", "Santiago"];
-  let mapPinsAnimated = false;
-
-  function animateMapPins() {
-    if (mapPinsAnimated) return;
-    mapPinsAnimated = true;
-    MAP_PIN_ORDER.forEach((name, i) => {
-      const pin = document.querySelector(`.map-pin[data-name="${name}"]`);
-      if (!pin) return;
-      setTimeout(() => pin.classList.add("pin-dropped"), i * 400);
-    });
-  }
-
-  // ---------- Map pins: size each label's white pill background to the
-  // actual rendered text, converting the requested CSS-pixel values
-  // (10px/3px padding, 12px corner radius, 1px border) into the SVG's own
-  // user-unit scale. This map doesn't render at 1 user unit = 1 CSS px
-  // (the viewBox is 360 units wide, scaled to fill whatever width the
-  // frame has), so a hardcoded unit value would drift from the intended
-  // pixel size as the viewport changes; this keeps it exact at every
-  // width. Each label keeps its existing position (above/below its pin,
-  // left/middle/right-anchored per pin) rather than a uniform offset to
-  // one side: Riyadh and Kuwait City sit close to the map's right edge
-  // and close to each other, and a uniform right offset was tried and
-  // measurably clipped both off the frame's edge and collided with each
-  // other; it's purely a contrast problem (thin navy map lines under
-  // plain text), not an overlap problem, so the pill goes behind the
-  // existing positions rather than repositioning them. Re-run on resize
-  // (the scale changes) and once webfonts are loaded (label text uses
-  // Inter, loaded with font-display: swap, so its metrics can shift
-  // after the swap, same reasoning as the Frame 1 cover-photo sync). ----------
-  const worldMap = document.querySelector(".world-map");
-
-  function syncPinLabelPills() {
-    if (!worldMap) return;
-    const svgWidth = worldMap.getBoundingClientRect().width;
-    if (!svgWidth) return;
-    const scale = svgWidth / 360; // CSS px per 1 SVG user unit
-    const padX = 10 / scale;
-    const padY = 3 / scale;
-    const radius = 12 / scale;
-    const strokeWidth = 1 / scale;
-
-    document.querySelectorAll(".map-pin").forEach((pin) => {
-      const text = pin.querySelector(".pin-label");
-      const bg = pin.querySelector(".pin-label-bg");
-      if (!text || !bg) return;
-      bg.setAttribute("stroke-width", strokeWidth);
-      const box = text.getBBox();
-      bg.setAttribute("x", box.x - padX);
-      bg.setAttribute("y", box.y - padY);
-      bg.setAttribute("width", box.width + padX * 2);
-      bg.setAttribute("height", box.height + padY * 2);
-      bg.setAttribute("rx", radius);
-      bg.setAttribute("ry", radius);
-    });
-  }
-
-  if (worldMap) {
-    syncPinLabelPills();
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(syncPinLabelPills);
-    }
-  }
-
-  // ---------- Logo fallback: if a card's logo image fails to load, drop the
-  // image slot entirely so the caption/text stands alone rather than showing
-  // a broken-image icon or empty box. ----------
-  document.querySelectorAll(".proof-logo img, .cred-logo img").forEach((img) => {
+  // ---------- Logo fallback: if a credential card's logo image fails to
+  // load, drop the image slot entirely so the text stands alone rather
+  // than showing a broken-image icon or empty box. ----------
+  document.querySelectorAll(".cred-logo img").forEach((img) => {
     img.addEventListener("error", () => {
-      const slot = img.closest(".proof-logo, .cred-logo");
+      const slot = img.closest(".cred-logo");
       if (slot) slot.remove();
     });
   });
+
+  // ---------- Frame 9: "Share this profile" button. Uses the native Web
+  // Share API where available (mobile browsers, mainly); falls back to
+  // copying the prewritten text to the clipboard and briefly flipping the
+  // button's label to confirm, since most desktop browsers don't support
+  // navigator.share. ----------
+  const shareBtn = document.getElementById("share-btn");
+  const SHARE_TEXT =
+    "Thought this profile was worth passing along. Fahed is a healthcare operator who's done turnarounds, pivots, and multinational stand-ups across the Gulf. Based in Riyadh. fahedalessa.com";
+
+  if (shareBtn) {
+    shareBtn.addEventListener("click", async () => {
+      if (navigator.share) {
+        try {
+          await navigator.share({ title: "Fahed Al Essa", text: SHARE_TEXT });
+        } catch (err) {
+          // User cancelled the share sheet, or it failed silently; nothing to do.
+        }
+        return;
+      }
+      const label = shareBtn.querySelector("span");
+      try {
+        await navigator.clipboard.writeText(SHARE_TEXT);
+        if (label) {
+          const original = label.textContent;
+          label.textContent = "Copied!";
+          setTimeout(() => {
+            label.textContent = original;
+          }, 2000);
+        }
+      } catch (err) {
+        // Clipboard write failed (no permission, insecure context, etc.); nothing more to do.
+      }
+    });
+  }
 
   // ---------- Frame 1: keep "Tap right to continue" pinned just above the
   // footer by measuring the footer's actual rendered height, rather than a
@@ -323,7 +277,6 @@
     render(false);
     syncTapHintPosition();
     syncCoverPhotoHeight();
-    syncPinLabelPills();
   }
 
   window.addEventListener("resize", handleViewportChange);
