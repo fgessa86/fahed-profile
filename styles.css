@@ -216,6 +216,20 @@ body {
   max-width: 340px;
 }
 
+.edu-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin: 24px 0 16px;
+}
+
+.edu-logos img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+}
+
 .tap-hint {
   position: absolute;
   margin-top: 0;
