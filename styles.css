@@ -265,7 +265,7 @@ body {
 .outcome-list li {
   font-size: 1.03rem;
   line-height: 1.45;
-  color: var(--ink);
+  color: var(--navy);
   padding-left: 16px;
   position: relative;
 }
@@ -286,6 +286,14 @@ body {
   color: var(--navy);
 }
 
+.outcome-value {
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--pin-accent);
+}
+
 .chapter-closing {
   font-family: var(--serif);
   font-style: italic;
@@ -294,6 +302,10 @@ body {
   font-size: 1rem;
   line-height: 1.4;
   margin: 22px 0 0;
+}
+
+.chapter-closing strong {
+  font-weight: 700;
 }
 
 /* ---------- Frame 5: Fluent Across ---------- */
@@ -375,8 +387,7 @@ body {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  border: 1.5px solid var(--navy);
-  color: var(--navy);
+  color: #fff;
   font-family: var(--serif);
   font-weight: 700;
   font-size: 0.95rem;
@@ -384,6 +395,10 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+.mandate-num-blue { background: #2e86c1; }
+.mandate-num-amber { background: #e67e22; }
+.mandate-num-red { background: var(--pin-accent); }
 
 .mandate-body {
   display: flex;
@@ -404,6 +419,11 @@ body {
   font-size: 0.95rem;
   line-height: 1.5;
   color: var(--charcoal);
+}
+
+.mandate-proof strong {
+  color: var(--navy);
+  font-weight: 700;
 }
 
 /* ---------- Frame 7: The Arc ---------- */
