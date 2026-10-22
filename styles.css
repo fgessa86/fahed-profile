@@ -219,7 +219,7 @@ body {
 .edu-logos {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 24px;
   margin: 24px 0 16px;
 }
@@ -228,10 +228,6 @@ body {
   height: 32px;
   width: auto;
   object-fit: contain;
-}
-
-.logo-blend {
-  mix-blend-mode: multiply;
 }
 
 .tap-hint {
@@ -264,6 +260,18 @@ body {
   justify-content: flex-start;
 }
 
+.chapter-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.chapter-head .hero {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
 .chapter-descriptor {
   margin: 10px 0 0;
   font-size: 1.05rem;
@@ -280,12 +288,12 @@ body {
 }
 
 .chapter-logo {
-  display: block;
+  flex: 0 0 auto;
   align-self: flex-start;
-  height: 36px;
+  height: 60px;
   width: auto;
   object-fit: contain;
-  margin: 8px 0 12px;
+  margin: 0;
 }
 
 .outcome-list {
@@ -378,6 +386,14 @@ body {
   border-radius: 50%;
   background: var(--navy);
 }
+
+.stat-domain {
+  font-weight: 700;
+}
+
+.stat-domain-blue { color: #2e86c1; }
+.stat-domain-amber { color: #e67e22; }
+.stat-domain-red { color: var(--pin-accent); }
 
 .word-stack {
   display: flex;
