@@ -185,11 +185,11 @@
   // copying the prewritten text to the clipboard and briefly flipping the
   // button's label to confirm, since most desktop browsers don't support
   // navigator.share. ----------
-  const shareBtn = document.getElementById("share-btn");
+  const shareBtns = document.querySelectorAll(".share-btn");
   const SHARE_TEXT =
     "Thought this profile was worth passing along. Fahed is a healthcare operator who's done turnarounds, pivots, and multinational stand-ups across the Gulf. Based in Riyadh. fahedalessa.com";
 
-  if (shareBtn) {
+  shareBtns.forEach((shareBtn) => {
     shareBtn.addEventListener("click", async () => {
       if (navigator.share) {
         try {
@@ -213,7 +213,7 @@
         // Clipboard write failed (no permission, insecure context, etc.); nothing more to do.
       }
     });
-  }
+  });
 
   // ---------- Frame 1: keep "Tap right to continue" pinned just above the
   // footer by measuring the footer's actual rendered height, rather than a
