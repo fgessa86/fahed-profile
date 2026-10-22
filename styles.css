@@ -12,6 +12,17 @@
 
 * { box-sizing: border-box; }
 
+/* ---------- Orphan prevention: no body copy should end a line on a
+   single stranded word. text-wrap: pretty balances line breaks in
+   supporting browsers; hyphens: auto backs it up. Scoped to body text
+   (p/li and their inherited descendants), not the large display
+   headlines. ---------- */
+p,
+li {
+  text-wrap: pretty;
+  hyphens: auto;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -632,17 +643,6 @@ body {
   border-top: 1px solid var(--line);
 }
 
-.cta-row {
-  display: flex;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.cta-col {
-  flex: 1 1 140px;
-  min-width: 0;
-}
-
 .connect-cta {
   font-family: var(--serif);
   font-weight: 700;
@@ -652,17 +652,17 @@ body {
   text-align: left;
 }
 
-.contact-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 18px;
+.connect-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
 }
 
 .contact-link,
 .share-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   color: var(--navy);
   text-decoration: none;
   font-size: 0.92rem;
