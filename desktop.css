@@ -9,6 +9,10 @@
   display: none;
 }
 
+.d-float-footer {
+  display: none;
+}
+
 @media (min-width: 1024px) {
   .stage {
     display: none;
@@ -407,44 +411,48 @@
     margin: 20px 0 0;
   }
 
-  .d-contact-row {
-    margin: 100px 0 0;
+  /* ---------- Floating contact bar ----------
+     Persistent across the whole scroll (fixed, not part of any
+     section), replacing Section 9's old inline contact row. */
+  .d-float-footer {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 32px 0;
-    border-top: 1px solid rgba(21, 40, 75, 0.14);
-    border-bottom: 1px solid rgba(21, 40, 75, 0.14);
+    gap: 32px;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background: var(--navy);
+    border-radius: 999px;
+    padding: 14px 32px;
+    box-shadow: 0 8px 24px rgba(21, 40, 75, 0.2);
   }
 
-  .d-contact-item {
+  .d-float-item {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    color: var(--navy);
+    gap: 8px;
+    color: var(--cream);
     text-decoration: none;
     font-family: var(--sans);
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
   }
 
-  .d-contact-item svg {
-    width: 24px;
-    height: 24px;
+  .d-float-item svg {
+    width: 18px;
+    height: 18px;
     flex-shrink: 0;
-    opacity: 0.85;
+    color: var(--cream);
   }
 
-  .d-footer-line {
-    margin: 32px 0 0;
-    font-size: 13px;
-    letter-spacing: 0.05em;
-    color: var(--charcoal);
-    text-align: center;
+  .d-float-item:hover span {
+    text-decoration: underline;
   }
 }
 
