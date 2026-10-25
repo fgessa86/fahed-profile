@@ -1,6 +1,7 @@
 (function () {
   "use strict";
 
+  const isArabic = document.documentElement.lang === "ar";
   const screens = document.getElementById("screens");
   const track = document.getElementById("track");
   const footer = document.querySelector(".site-footer");
@@ -150,11 +151,15 @@
       return;
     }
 
-    // Negligible movement: split tap. Right half of the VIEWPORT -> forward, left half -> back.
+    // Negligible movement: split tap. Right half of the VIEWPORT -> forward,
+    // left half -> back. In Arabic (RTL), reading order is reversed, so the
+    // tap zones flip: left half -> forward, right half -> back.
     if (elapsed < 400) {
       const rect = screens.getBoundingClientRect();
       const midpoint = rect.left + rect.width / 2;
-      if (e.clientX >= midpoint) {
+      const tappedRightHalf = e.clientX >= midpoint;
+      const forward = isArabic ? !tappedRightHalf : tappedRightHalf;
+      if (forward) {
         next();
       } else {
         prev();
@@ -186,14 +191,17 @@
   // button's label to confirm, since most desktop browsers don't support
   // navigator.share. ----------
   const shareBtns = document.querySelectorAll(".share-btn");
-  const SHARE_TEXT =
-    "Thought this profile was worth passing along. Fahed is a healthcare operator who's done turnarounds, pivots, and multinational stand-ups across the Gulf. Based in Riyadh. fahedalessa.com";
+  const SHARE_TITLE = isArabic ? "فهد العيسى" : "Fahed Al Essa";
+  const SHARE_TEXT = isArabic
+    ? "رأيت أن هذا الملف يستحق المشاركة. فهد قائد في القطاع الصحي، لديه خبرة في التحوّل التشغيلي، وإعادة توجيه نماذج الأعمال، وتأسيس عمليات الشركات العالمية في الخليج. مقيم في الرياض. fahedalessa.com/ar"
+    : "Thought this profile was worth passing along. Fahed is a healthcare operator who's done turnarounds, pivots, and multinational stand-ups across the Gulf. Based in Riyadh. fahedalessa.com";
+  const COPIED_LABEL = isArabic ? "تم النسخ" : "Copied!";
 
   shareBtns.forEach((shareBtn) => {
     shareBtn.addEventListener("click", async () => {
       if (navigator.share) {
         try {
-          await navigator.share({ title: "Fahed Al Essa", text: SHARE_TEXT });
+          await navigator.share({ title: SHARE_TITLE, text: SHARE_TEXT });
         } catch (err) {
           // User cancelled the share sheet, or it failed silently; nothing to do.
         }
@@ -204,7 +212,7 @@
         await navigator.clipboard.writeText(SHARE_TEXT);
         if (label) {
           const original = label.textContent;
-          label.textContent = "Copied!";
+          label.textContent = COPIED_LABEL;
           setTimeout(() => {
             label.textContent = original;
           }, 2000);

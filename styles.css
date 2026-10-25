@@ -126,6 +126,48 @@ body {
   padding: max(14px, env(safe-area-inset-top)) 16px 0;
 }
 
+/* ---------- Language toggle ("ع | EN"), mobile instance: pinned at the
+   same vertical level as the progress bar, top-right of every frame.
+   Shown only on mobile/tablet since it lives inside .stage, which is
+   itself hidden at the desktop breakpoint (see desktop.css for the
+   desktop instance, a separate fixed element). ---------- */
+.lang-toggle {
+  position: absolute;
+  top: max(12px, env(safe-area-inset-top));
+  right: 16px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  background: rgba(250, 247, 242, 0.85);
+  padding: 4px 10px;
+  border-radius: 999px;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.lang-toggle a {
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.lang-toggle a:hover {
+  text-decoration: underline;
+}
+
+.lang-toggle .lang-current {
+  color: var(--navy);
+  opacity: 0.45;
+}
+
+.lang-toggle .lang-sep {
+  color: var(--navy);
+  opacity: 0.3;
+}
+
 .segment {
   flex: 1;
   height: 3px;

@@ -1,0 +1,217 @@
+/* ====================================================================
+   RTL / Arabic overrides. Loaded ONLY by ar/index.html, after
+   styles.css and desktop.css, so everything here is additive: the
+   English page never loads this file and is completely unaffected.
+
+   Technique: `html`/`body` get `direction: rtl` below, and that alone
+   is enough to mirror every flex row and grid in styles.css/desktop.css
+   (title+logo, badge+text, footer icons, the mandate/fluent/credential/
+   arc grids): `flex-direction: row` and CSS Grid's column order are
+   both direction-aware, so a plain `row`/grid with no extra CSS already
+   lays the DOM-first child out on the right under direction: rtl. Adding
+   `row-reverse` on top (an earlier mistake here, caught by testing) is
+   a DOUBLE reversal that puts things back in LTR order, so none of
+   these two-sided layouts need touching at all. What direction: rtl
+   does NOT fix automatically is anything using a physical left/right
+   property (position: absolute; left: ...) or an explicit text-align:
+   left in the base stylesheet, since neither is direction-aware; those
+   are overridden individually below. Native Unicode bidi handles the
+   English-in-parentheses case (e.g. "جامعة بنسلفانيا (University of
+   Pennsylvania)") automatically: no extra markup needed either.
+   ==================================================================== */
+
+:root {
+  --serif: "Noto Serif Arabic", Georgia, serif;
+  --sans: "IBM Plex Sans Arabic", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html {
+  direction: rtl;
+  /* Arabic needs slightly larger body text for legibility; this bumps
+     every rem-based size in styles.css proportionally (desktop.css's
+     px-based sizes are bumped individually further down). */
+  font-size: 17px;
+}
+
+body {
+  direction: rtl;
+}
+
+/* .track's children (the 9 frames) are positioned by JS
+   (translateX(-current * viewportWidth)) on the assumption that they
+   lay out physically left-to-right, frame0 first - exactly like the
+   English page. Direction is inherited, so without this the frames
+   would re-stack right-to-left under the page's direction: rtl,
+   silently breaking that math (advancing would translate into empty
+   space instead of the next frame). Keeping .track itself ltr
+   preserves the physical layout the carousel math depends on; .frame
+   immediately resets to rtl so each frame's OWN content (text, pills,
+   icon rows) still reads and mirrors correctly for Arabic. */
+.track {
+  direction: ltr;
+}
+
+.frame {
+  direction: rtl;
+}
+
+p,
+li,
+h1,
+h2,
+h3 {
+  text-align: right;
+}
+
+/* ---------- Mobile: Frame 1 cover ---------- */
+.tap-hint {
+  right: auto;
+  left: 24px;
+}
+
+/* ---------- Arabic-only full-sentence pill component, used in place
+   of the English outcome-list/numbers-grid split (number + text) on
+   Frames 2-4, both mobile and desktop: Arabic naturally embeds the
+   number mid-sentence, so each stat becomes one self-contained pill
+   rather than a separate hook number and description. ---------- */
+.ar-pill-list {
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ar-pill {
+  display: block;
+  background: var(--navy);
+  color: var(--cream);
+  border-radius: 999px;
+  padding: 14px 24px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.ar-extra-line {
+  margin: 4px 0 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--charcoal);
+  text-align: right;
+}
+
+/* ---------- Mobile: Frame 5 Fluent Across, simplified for Arabic (no
+   single-word word-stack display; Arabic headers are full phrases) ---------- */
+.ar-fluent-block {
+  margin: 0 0 24px;
+}
+
+.ar-fluent-block:last-child {
+  margin-bottom: 0;
+}
+
+.ar-fluent-head {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin: 0 0 8px;
+}
+
+.ar-fluent-body {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--charcoal);
+}
+
+/* ---------- Mobile: Frame 9 connect grid header (explicit
+   text-align: left in styles.css, which doesn't auto-flip) ---------- */
+.connect-cta {
+  text-align: right;
+}
+
+.cred-logo img {
+  object-position: right center;
+}
+
+@media (min-width: 1024px) {
+  /* Arabic pill list reads larger on desktop, matching the 1-2px bump
+     applied to the rest of the desktop body copy below. */
+  .ar-pill-list {
+    margin-top: 48px;
+    gap: 14px;
+  }
+
+  .ar-pill {
+    font-size: 1.15rem;
+    padding: 16px 28px;
+  }
+
+  .ar-extra-line {
+    font-size: 1.05rem;
+  }
+
+  .d-closing {
+    font-size: 19px;
+  }
+
+  /* ---------- Desktop Fluent Across: the column order already
+     mirrors automatically (inherited direction: rtl), but the
+     divider border is a physical border-left, so it needs flipping
+     to border-right to keep landing BETWEEN columns, not on the
+     outer edges. ---------- */
+  .d-fluent-col {
+    border-left: none;
+    border-right: 1px solid rgba(21, 40, 75, 0.2);
+  }
+
+  .d-fluent-col:first-child {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .d-fluent-col:last-child {
+    padding-left: 0;
+  }
+
+  .d-fluent-body,
+  .d-mandate-desc,
+  .d-number-text,
+  .d-plain-row,
+  .d-meta,
+  .d-cred-program {
+    font-size: 17px;
+  }
+
+  .d-fluent-head {
+    font-size: 33px;
+  }
+
+  .d-mandate-title {
+    font-size: 25px;
+  }
+
+  .d-cred-degree {
+    font-size: 15px;
+  }
+
+  .d-cred-logo-wrap img {
+    object-position: right center;
+  }
+
+  /* ---------- Desktop timeline: the grid's column order already
+     mirrors automatically (2005 lands on the right end, 2026 on the
+     left, matching the spec), but each dot marker is positioned with
+     a physical `left: 0`, which needs flipping to `right: 0` to stay
+     at its item's start edge (the right edge, in RTL). ---------- */
+  .d-arc-dot {
+    left: auto;
+    right: 0;
+  }
+
+  .d-arc-years,
+  .d-arc-desc {
+    font-size: 17px;
+  }
+}

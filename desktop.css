@@ -13,6 +13,10 @@
   display: none;
 }
 
+.lang-toggle-desktop {
+  display: none;
+}
+
 @media (min-width: 1024px) {
   .stage {
     display: none;
@@ -21,6 +25,47 @@
   .desktop {
     display: block;
     background: var(--cream);
+  }
+
+  /* Desktop instance of the language toggle: fixed to the page (not
+     scoped to a frame, since desktop is one long scroll), top-right,
+     above the progress bar's z-index (which doesn't even render on
+     desktop, but matching the stated requirement regardless). */
+  .lang-toggle-desktop {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: fixed;
+    top: 24px;
+    right: 32px;
+    z-index: 100;
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    background: rgba(250, 247, 242, 0.85);
+    padding: 6px 14px;
+    border-radius: 999px;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+
+  .lang-toggle-desktop a {
+    color: var(--navy);
+    text-decoration: none;
+  }
+
+  .lang-toggle-desktop a:hover {
+    text-decoration: underline;
+  }
+
+  .lang-toggle-desktop .lang-current {
+    color: var(--navy);
+    opacity: 0.45;
+  }
+
+  .lang-toggle-desktop .lang-sep {
+    color: var(--navy);
+    opacity: 0.3;
   }
 
   .desktop p,
