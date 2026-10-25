@@ -69,28 +69,86 @@ h3 {
   left: 24px;
 }
 
-/* ---------- Arabic-only full-sentence pill component, used in place
-   of the English outcome-list/numbers-grid split (number + text) on
-   Frames 2-4, both mobile and desktop: Arabic naturally embeds the
-   number mid-sentence, so each stat becomes one self-contained pill
-   rather than a separate hook number and description. ---------- */
+/* ---------- Mobile: Frame 7 vertical timeline. The connector line and
+   dot are a physical border-left + left: -5px in styles.css, which
+   direction: rtl does not touch (same category of fix as .tap-hint
+   above): left as-is, the line stays pinned to the screen's left edge
+   while the now-right-aligned Arabic text sits far away from it,
+   stranding the marker from the text it belongs to. Flipping both to
+   the right edge puts the line and dot immediately beside the text,
+   matching how they hug it in the English version. ---------- */
+.arc-item {
+  border-left: none;
+  border-right: 2px solid var(--line);
+  padding-left: 0;
+  padding-right: 14px;
+}
+
+.arc-item::before {
+  left: auto;
+  right: -5px;
+}
+
+/* ---------- Arabic pill component for Frames 2-4 (mobile and
+   desktop): the pill is a callout for the FIGURE only (e.g. "30%",
+   "3 سنوات"); the rest of the line is ordinary prose next to it, not
+   wrapped inside the pill. A grid, not a flex row, for the same
+   reason as the English desktop pills it's modeled on: a plain
+   row gives each pill only its own content's width, so a short "10%"
+   pill and a long "6 مليون دولار" pill in the same frame would end up
+   different sizes; a shared "auto" grid column sizes to the WIDEST
+   pill in that frame and (via Grid's default justify-items: stretch)
+   stretches every pill in the list to that same shared width, which
+   is what makes them read as one clean column instead of a ragged
+   row of differently-sized pills. .ar-pill-row is `display: contents`
+   so its pill + prose land directly in the parent grid's two columns.
+   Column order: with the list inheriting direction: rtl from the
+   page, grid column 1 (the pill, placed first in DOM) lands on the
+   RIGHT and column 2 (the prose) on the left, with no row-reverse
+   needed (same lesson learned elsewhere in this file: row-reverse on
+   an already-rtl container double-reverses). Each pill's own `dir`
+   is set per-string in the markup: digit-first figures ("30%", "$2.5
+   مليون") get dir="ltr" so the number and any symbol stay anchored in
+   reading order; Arabic-led or grammatically word-first figures
+   ("سنة واحدة", "٤ سنوات") get dir="rtl" with any embedded Western
+   digit wrapped in its own dir="ltr" span. */
 .ar-pill-list {
   list-style: none;
   margin: 22px 0 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 16px;
+  row-gap: 20px;
+  align-items: center;
+}
+
+.ar-pill-row {
+  display: contents;
 }
 
 .ar-pill {
-  display: block;
-  background: var(--navy);
-  color: var(--cream);
+  grid-column: 1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;
+  box-sizing: border-box;
+  background: #15284b;
+  color: #faf7f2;
+  font-family: var(--sans);
+  font-weight: 700;
+  padding: 10px 20px;
   border-radius: 999px;
-  padding: 14px 24px;
-  font-size: 1.05rem;
-  line-height: 1.6;
+  white-space: nowrap;
+  font-variant-numeric: lining-nums;
+}
+
+.ar-pill-prose {
+  grid-column: 2;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  line-height: 1.7;
   text-align: right;
 }
 
@@ -140,12 +198,16 @@ h3 {
      applied to the rest of the desktop body copy below. */
   .ar-pill-list {
     margin-top: 48px;
-    gap: 14px;
+    row-gap: 22px;
   }
 
   .ar-pill {
-    font-size: 1.15rem;
-    padding: 16px 28px;
+    font-size: 1.1rem;
+    padding: 12px 24px;
+  }
+
+  .ar-pill-prose {
+    font-size: 17px;
   }
 
   .ar-extra-line {
