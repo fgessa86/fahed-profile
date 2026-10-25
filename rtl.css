@@ -175,28 +175,44 @@ h3 {
 
 /* ---------- Mobile: Frame 5 Fluent Across, simplified for Arabic (no
    single-word word-stack display; Arabic headers are full phrases).
-   The header sits right above its own body text, so that gap stays
-   tight (clamp capped at 8px); the gap BETWEEN pillars stays generous
-   so each pillar still reads as its own block. ---------- */
-.ar-fluent-block {
-  margin: 0 0 clamp(24px, 5vh, 40px);
-}
-
-.ar-fluent-block:last-child {
-  margin-bottom: 0;
-}
-
-.ar-fluent-head {
+   Spacing model is deliberately just these three margin rules (plus
+   the first-pillar override below): each pillar's own margin-top is
+   the ONLY source of the gap BETWEEN pillars (generous, 32px), the
+   header's margin-bottom is the ONLY source of the gap from a header
+   to its own body (tight, 12px, so the pair reads as one unit), and
+   the body itself carries no margin at all. Nothing else on these
+   three elements sets margin or padding. */
+.pillar-header {
   font-family: var(--serif);
   font-weight: 700;
   font-size: 1.3rem;
-  margin: 0 0 clamp(4px, 1vh, 8px);
 }
 
-.ar-fluent-body {
+.pillar-body {
   font-size: 1.02rem;
   line-height: 1.7;
   color: var(--charcoal);
+}
+
+.ar-frame-5 .pillar {
+  margin-top: 32px;
+  margin-bottom: 0;
+}
+
+.ar-frame-5 .pillar-header {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.ar-frame-5 .pillar-body {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* The first pillar (Clinical) needs its own, larger gap from the hero
+   title above it rather than the standard inter-pillar gap. */
+.ar-frame-5 .pillar:first-of-type {
+  margin-top: 40px;
 }
 
 /* ---------- Mobile: Frame 9 connect grid header (explicit
