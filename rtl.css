@@ -174,9 +174,12 @@ h3 {
 }
 
 /* ---------- Mobile: Frame 5 Fluent Across, simplified for Arabic (no
-   single-word word-stack display; Arabic headers are full phrases) ---------- */
+   single-word word-stack display; Arabic headers are full phrases).
+   The header sits right above its own body text, so that gap stays
+   tight (clamp capped at 8px); the gap BETWEEN pillars stays generous
+   so each pillar still reads as its own block. ---------- */
 .ar-fluent-block {
-  margin: 0 0 24px;
+  margin: 0 0 clamp(24px, 5vh, 40px);
 }
 
 .ar-fluent-block:last-child {
@@ -187,7 +190,7 @@ h3 {
   font-family: var(--serif);
   font-weight: 700;
   font-size: 1.3rem;
-  margin: 0 0 8px;
+  margin: 0 0 clamp(4px, 1vh, 8px);
 }
 
 .ar-fluent-body {
@@ -221,16 +224,16 @@ h3 {
 }
 
 .work-tagline {
-  margin-top: clamp(20px, 5vh, 36px);
+  margin-top: clamp(24px, 6vh, 44px);
 }
 
 .frame-work .mandate-list {
-  margin-top: clamp(28px, 6vh, 48px);
+  margin-top: clamp(32px, 7vh, 56px);
   gap: clamp(20px, 4vh, 32px);
 }
 
 .contact-section {
-  margin-top: clamp(24px, 5vh, 40px);
+  margin-top: clamp(28px, 6vh, 48px);
 }
 
 .cred-logo img {
@@ -238,16 +241,21 @@ h3 {
 }
 
 /* ---------- Mobile: Frame 8 credential cards. Two stacked lines per
-   card instead of the English "degree (program)<br>institution"
-   block: a bold Arabic line (degree, school, and university together)
-   and a lighter English line underneath holding only the degree
-   abbreviation and the university name, for a quick-scan reference
-   next to the full Arabic detail. The English line sets its own
-   direction: ltr and font-family: Inter (loaded alongside the Arabic
-   webfonts specifically for this line, see the <head> font link)
-   since it is pure Latin text and reads oddly set in an Arabic
-   typeface or carried along by the page's inherited RTL run. */
-.cred-line-ar {
+   card: the degree name (line 1, bold navy) and the institution name
+   (line 2, grey), each line itself bilingual, Arabic and English
+   together separated by a pipe, rather than splitting the two
+   languages across separate lines. Both scripts share the one
+   Arabic-page font (var(--sans), IBM Plex Sans Arabic) and no
+   explicit direction is set, same as every other Arabic-plus-English
+   pairing in this file (e.g. "جامعة بنسلفانيا (University of
+   Pennsylvania)"): native Unicode bidi handles a short Latin run
+   embedded in the page's inherited RTL context on its own. */
+.cred-cards {
+  gap: clamp(16px, 3vh, 24px);
+}
+
+.cred-line-1,
+.d-cred-line-1 {
   display: block;
   font-family: var(--sans);
   font-weight: 700;
@@ -257,39 +265,20 @@ h3 {
   text-align: right;
 }
 
-.cred-line-en {
+.cred-line-2,
+.d-cred-line-2 {
   display: block;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: var(--sans);
   font-weight: 400;
-  color: rgba(26, 26, 26, 0.6);
-  font-size: 0.85rem;
+  color: #999999;
+  font-size: 0.95rem;
   line-height: 1.3;
   text-align: right;
-  direction: ltr;
   margin-top: 4px;
 }
 
-.d-cred-line-ar {
-  display: block;
-  font-family: var(--sans);
-  font-weight: 700;
-  color: var(--navy);
-  font-size: 1.1rem;
-  line-height: 1.3;
-  text-align: right;
+.d-cred-line-1 {
   margin: 20px 0 0;
-}
-
-.d-cred-line-en {
-  display: block;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 400;
-  color: rgba(26, 26, 26, 0.6);
-  font-size: 0.85rem;
-  line-height: 1.3;
-  text-align: right;
-  direction: ltr;
-  margin-top: 4px;
 }
 
 @media (min-width: 1024px) {
