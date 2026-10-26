@@ -306,7 +306,15 @@ h3 {
      mirrors automatically (inherited direction: rtl), but the
      divider border is a physical border-left, so it needs flipping
      to border-right to keep landing BETWEEN columns, not on the
-     outer edges. ---------- */
+     outer edges. The base rule's own :first-child/:last-child zero
+     out padding-left/padding-right respectively (correct for LTR,
+     where those are each column's OUTER edge); under RTL those are
+     each column's INNER, divider-facing edge instead, so left
+     uncorrected the outer-column text sits flush against the divider
+     with no breathing room at all. Restoring the padding on the
+     opposite side here (same 48px the base rule already uses
+     everywhere else) is what actually fixes that, not just flipping
+     the border and the outer-edge reset. */
   .d-fluent-col {
     border-left: none;
     border-right: 1px solid rgba(21, 40, 75, 0.2);
@@ -315,10 +323,12 @@ h3 {
   .d-fluent-col:first-child {
     border-right: none;
     padding-right: 0;
+    padding-left: 48px;
   }
 
   .d-fluent-col:last-child {
     padding-left: 0;
+    padding-right: 48px;
   }
 
   .d-fluent-body,
