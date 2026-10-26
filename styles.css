@@ -416,6 +416,24 @@ body {
   font-weight: 700;
 }
 
+/* A short italic line of context sitting between a chapter's
+   descriptor and its pills/outcome list (currently only Frame 4's
+   DTC-to-B2B2C pivot sentence). Shared, not Arabic-specific: the
+   Arabic page's blanket `p { text-align: right }` rule in rtl.css is
+   what right-aligns it there, no separate rule needed. */
+.context-line {
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(26, 26, 26, 0.85);
+  margin: 12px 0 20px;
+}
+
+.context-line strong {
+  color: var(--navy);
+  font-weight: 700;
+}
+
 /* ---------- Frame 5: Fluent Across ---------- */
 .frame-fluent {
   justify-content: flex-start;

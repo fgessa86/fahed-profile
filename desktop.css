@@ -256,13 +256,6 @@
     font-size: 0.82em;
   }
 
-  .d-plain-row {
-    grid-column: 1 / -1;
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--charcoal);
-  }
-
   .d-closing {
     font-family: var(--serif);
     font-style: italic;
