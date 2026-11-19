@@ -290,6 +290,20 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
 .way>div:nth-child(2){flex:1;min-width:0}
 .way .wi{width:30px;display:flex;justify-content:center;align-items:center;font-size:24px;color:var(--gold);flex:none;align-self:center}
 .hexpilot{width:100%;height:118px;display:block}
+.stat{display:flex;gap:12px;align-items:center;background:var(--white);border:1px solid var(--rule);border-radius:14px;padding:11px 13px}
+.stat .n{font-size:30px;font-weight:700;letter-spacing:-.6px;line-height:1;color:var(--c,var(--teal2));min-width:108px}
+.stat .t{font-size:12.5px;line-height:1.35}
+.stat .t small{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+.yard{display:flex;gap:14px;align-items:center;background:var(--teal);color:#fff;border-radius:16px;padding:14px}
+.yard .rg{width:84px;height:84px;flex:none}
+.bars{flex:1;display:flex;flex-direction:column;gap:5px}
+.bars div{display:grid;grid-template-columns:54px 1fr 22px;gap:6px;align-items:center;font-size:11.5px}
+.bars i{display:block;height:7px;border-radius:4px;background:var(--c)}
+.bars u{display:block;height:7px;border-radius:4px;background:rgba(255,255,255,.15);text-decoration:none}
+.bars b{font-size:11px;text-align:right;color:#CFE0DC}
+.lvl{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.lvl div{background:var(--white);border:1px solid var(--rule);border-radius:13px;padding:9px 10px;font-size:11.5px;color:var(--muted);line-height:1.35}
+.lvl b{display:block;font-size:12.5px;color:var(--ink,#0D3B3E)}
 .restart{align-self:center;border:1.5px solid rgba(255,255,255,.45);background:transparent;color:#fff;border-radius:20px;padding:9px 16px;font-size:13px;font-weight:600;display:inline-flex;gap:7px;align-items:center}
 </style>
 </head>
@@ -347,6 +361,16 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
   </div>
   <div class="quote"><div class="big">Every healthy day is margin.</div><p class="sm" style="color:#CFE0DC;margin-top:6px">Keeping people well stops being marketing. It becomes how HHC protects its business.</p></div>
   <p class="sm mut">Insurers already act on this. Vitality pays for wellness rewards out of lower claims. HHC has the same incentive and a far larger population that does not switch.</p>
+</section>
+
+<section class="f" data-t="The Saudi case" data-s="What the evidence says">
+  <div class="k">1 · The shift</div>
+  <h2>Half of Saudi disease burden is modifiable.</h2>
+  <div class="stat" style="--c:var(--red)"><div class="n">50%</div><div class="t"><b>of the disease burden</b> comes from risks people and places can change<small>Among the highest of 21 countries analysed</small></div></div>
+  <div class="stat" style="--c:var(--goldd)"><div class="n">+10.6%</div><div class="t"><b>GDP uplift by 2050</b> if those risks were removed, about $195B<small>One of the largest in the sample</small></div></div>
+  <div class="stat" style="--c:var(--teal2)"><div class="n">19 of 23</div><div class="t"><b>drivers of health</b> sit outside the healthcare system<small>Food, movement, sleep, belonging, surroundings</small></div></div>
+  <div class="quote"><div class="big" style="font-size:20px;line-height:1.2">Rafeeq goes after the share a neighbourhood can move.</div><p class="sm" style="color:#CFE0DC;margin-top:6px">Figures are an upper bound that assumes every risk is removed. They show scale, not a forecast.</p></div>
+  <div class="src">McKinsey Health Institute, The future of healthy living: A $16.4 trillion opportunity, September 2026.</div>
 </section>
 
 <!-- 3 DETERMINANTS -->
@@ -488,6 +512,30 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
   <p class="sm" style="font-weight:600;color:var(--teal)">Duolingo's league reset, Singapore's seasons, run block by block.</p>
 </section>
 
+<section class="f" data-t="One yardstick" data-s="One score at every level">
+  <div class="k">3 · The rhythm</div>
+  <h2>One score, from a person to a cluster.</h2>
+  <div class="yard">
+    <svg class="rg" viewBox="0 0 54 54"><circle cx="27" cy="27" r="22" stroke="rgba(255,255,255,.18)" stroke-width="6" fill="none"/><circle cx="27" cy="27" r="22" stroke="#E3A72F" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="38.7" transform="rotate(-90 27 27)"/><text x="27" y="32" text-anchor="middle" fill="#fff" font-size="15" font-weight="700" font-family="IBM Plex Sans, Arial, sans-serif">72</text></svg>
+    <div class="bars">
+      <div style="--c:var(--teal2)"><span>Move</span><u><i style="width:78%"></i></u><b>78</b></div>
+      <div style="--c:var(--red)"><span>Eat</span><u><i style="width:64%"></i></u><b>64</b></div>
+      <div style="--c:var(--gold)"><span>Connect</span><u><i style="width:70%"></i></u><b>70</b></div>
+      <div style="--c:var(--blue)"><span>Safe</span><u><i style="width:81%"></i></u><b>81</b></div>
+      <div style="--c:var(--green)"><span>Green</span><u><i style="width:66%"></i></u><b>66</b></div>
+      <div style="--c:var(--goldd)"><span>Check</span><u><i style="width:74%"></i></u><b>74</b></div>
+    </div>
+  </div>
+  <div class="lvl">
+    <div><b>You</b>Your own six scores, private to you</div>
+    <div><b>Your block</b>Rolled up, and the team in the weekly race</div>
+    <div><b>Your neighbourhood</b>The score on every resident's Home</div>
+    <div><b>The cluster</b>What HHC steers by and reports</div>
+  </div>
+  <p class="sm mut">The same six dimensions at every level, so a gain on one street shows up in the cluster number.</p>
+  <div class="src">Illustrative values. Healthy living has no shared definition or measure yet; this would be the one HHC owns. Idea informed by McKinsey Health Institute, September 2026.</div>
+</section>
+
 <!-- 11 ENGINE -->
 <section class="f dk" data-dark data-t="The engine" data-s="AI behind the scenes">
   <div class="k">4 · The engine</div>
@@ -517,7 +565,7 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
   <div class="k">6 · The pilot</div>
   <h2>Start with six neighbourhoods, for one season.</h2>
   <svg class="hexpilot" viewBox="0 0 290 125"><path d="M49.4 26.5 L49.4 53.5 L26.0 67.0 L2.6 53.5 L2.6 26.5 L26.0 13.0Z" fill="#fff" stroke="#D5DEDC" stroke-width="1.2"/><path d="M101.4 26.5 L101.4 53.5 L78.0 67.0 L54.6 53.5 L54.6 26.5 L78.0 13.0Z" fill="#E3A72F" stroke="#fff" stroke-width="2"/><text x="78" y="37" text-anchor="middle" font-size="9" font-weight="700" fill="#0D3B3E" font-family="IBM Plex Sans, Arial, sans-serif">LIVE 1</text><path d="M78 42l2 4 4.5.6-3.3 3 .8 4.4-4-2.1-4 2.1.8-4.4-3.3-3 4.5-.6z" fill="#0D3B3E"/><path d="M153.4 26.5 L153.4 53.5 L130.0 67.0 L106.6 53.5 L106.6 26.5 L130.0 13.0Z" fill="#EEF3F1" stroke="#9DBAB5" stroke-width="1.8" stroke-dasharray="4 3"/><text x="130" y="39.0" text-anchor="middle" font-size="7.5" font-weight="700" fill="#5C6B70" font-family="IBM Plex Sans, Arial, sans-serif">CONTROL</text><text x="130" y="51.0" text-anchor="middle" font-size="10" font-weight="700" fill="#5C6B70" font-family="IBM Plex Sans, Arial, sans-serif">1</text><path d="M205.4 26.5 L205.4 53.5 L182.0 67.0 L158.6 53.5 L158.6 26.5 L182.0 13.0Z" fill="#E3A72F" stroke="#fff" stroke-width="2"/><text x="182" y="37" text-anchor="middle" font-size="9" font-weight="700" fill="#0D3B3E" font-family="IBM Plex Sans, Arial, sans-serif">LIVE 2</text><path d="M182 42l2 4 4.5.6-3.3 3 .8 4.4-4-2.1-4 2.1.8-4.4-3.3-3 4.5-.6z" fill="#0D3B3E"/><path d="M257.4 26.5 L257.4 53.5 L234.0 67.0 L210.6 53.5 L210.6 26.5 L234.0 13.0Z" fill="#EEF3F1" stroke="#9DBAB5" stroke-width="1.8" stroke-dasharray="4 3"/><text x="234" y="39.0" text-anchor="middle" font-size="7.5" font-weight="700" fill="#5C6B70" font-family="IBM Plex Sans, Arial, sans-serif">CONTROL</text><text x="234" y="51.0" text-anchor="middle" font-size="10" font-weight="700" fill="#5C6B70" font-family="IBM Plex Sans, Arial, sans-serif">2</text><path d="M75.4 71.5 L75.4 98.5 L52.0 112.0 L28.6 98.5 L28.6 71.5 L52.0 58.0Z" fill="#EEF3F1" stroke="#9DBAB5" stroke-width="1.8" stroke-dasharray="4 3"/><text x="52" y="84.0" text-anchor="middle" font-size="7.5" font-weight="700" fill="#5C6B70" font-family="IBM Plex Sans, Arial, sans-serif">CONTROL</text><text x="52" y="96.0" text-anchor="middle" font-size="10" font-weight="700" fill="#5C6B70" font-family="IBM Plex Sans, Arial, sans-serif">3</text><path d="M127.4 71.5 L127.4 98.5 L104.0 112.0 L80.6 98.5 L80.6 71.5 L104.0 58.0Z" fill="#fff" stroke="#D5DEDC" stroke-width="1.2"/><path d="M179.4 71.5 L179.4 98.5 L156.0 112.0 L132.6 98.5 L132.6 71.5 L156.0 58.0Z" fill="#E3A72F" stroke="#fff" stroke-width="2"/><text x="156" y="82" text-anchor="middle" font-size="9" font-weight="700" fill="#0D3B3E" font-family="IBM Plex Sans, Arial, sans-serif">LIVE 3</text><path d="M156 87l2 4 4.5.6-3.3 3 .8 4.4-4-2.1-4 2.1.8-4.4-3.3-3 4.5-.6z" fill="#0D3B3E"/><path d="M231.4 71.5 L231.4 98.5 L208.0 112.0 L184.6 98.5 L184.6 71.5 L208.0 58.0Z" fill="#fff" stroke="#D5DEDC" stroke-width="1.2"/><path d="M283.4 71.5 L283.4 98.5 L260.0 112.0 L236.6 98.5 L236.6 71.5 L260.0 58.0Z" fill="#fff" stroke="#D5DEDC" stroke-width="1.2"/></svg>
-  <p class="xs" style="margin-top:-4px">One cluster: three live neighbourhoods, three matched as controls.</p>
+  <p class="xs" style="margin-top:-4px">One cluster: three live neighbourhoods, three matched as controls. One focus: metabolic health through food and activity, with early wins inside a year.</p>
   <div class="facts">
     <div><b>90 days</b><span>Timed to one season, such as winter or Ramadan</span></div>
     <div><b>Partners</b><span>Municipality, Sports for All, one or two reward partners</span></div>
@@ -544,7 +592,7 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
   <div class="fit">
     <div class="fr"><img class="logo" src="/rafeeq/assets/penn.png" alt="University of Pennsylvania"><div><b>Science to business</b><span>Molecular biology and biotech at Penn, cancer research at Wistar, then an MBA</span><em>Evidence into a product and a value case</em></div></div>
     <div class="fr"><img class="logo" src="/rafeeq/assets/taiba.png" alt="Taiba Hospital"><div><b>Healthcare operations</b><span>Hospital management at Taiba Hospital, Kuwait; physician equity model</span><em>Working with clusters, clinicians and incentives</em></div></div>
-    <div class="fr"><img class="logo" src="/rafeeq/assets/berkeley-ph.png" alt="UC Berkeley Public Health"><div><b>Public health</b><span>MPH, UC Berkeley</span><em>The determinants, the score, the challenges</em></div></div>
+    <div class="fr"><img class="logo" src="/rafeeq/assets/berkeley-ph.png" alt="UC Berkeley Public Health"><div><b>Public health</b><span>MPH, UC Berkeley</span><em>The determinants, the score HHC steers by, the challenges</em></div></div>
     <div class="fr"><img class="logo" src="/rafeeq/assets/kilow.png" alt="Kilow"><div><b>Products and communities</b><span>Founder of Kilow and Mayv</span><em>The resident app and the community around it</em></div></div>
     <div class="fr" style="--c:var(--red)"><div class="pi"><i data-i="spark"></i></div><div><b>AI and agentic systems</b><span>Built the Sabiq agent model for HHC</span><em>The engine behind the scenes</em></div></div>
   </div>
