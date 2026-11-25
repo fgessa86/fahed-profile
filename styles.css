@@ -643,6 +643,40 @@ body {
   gap: 12px;
 }
 
+/* Primary conversion action on Frame 9, sitting inside .work-header
+   (not as a sibling of .contact-section) so its own margin controls
+   both the gap above it and the gap before the icon grid directly,
+   rather than fighting .frame-work's flex layout (space-between on
+   the Arabic page, see rtl.css) for vertical position. Icon-before-
+   text in the DOM, same as every contact-link, so direction: rtl on
+   the Arabic page mirrors it to the right automatically; no separate
+   RTL rule needed. */
+.cta-book-call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 52px;
+  margin: clamp(24px, 5vh, 36px) 0 clamp(20px, 4vh, 32px);
+  background: var(--navy);
+  color: var(--cream);
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1.05rem;
+  text-decoration: none;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.cta-book-call svg {
+  flex-shrink: 0;
+}
+
+.cta-book-call:active {
+  filter: brightness(0.88);
+}
+
 /* ---------- Frame 8: credentials ---------- */
 .frame-last {
   justify-content: flex-start;

@@ -312,6 +312,40 @@
     gap: 60px;
   }
 
+  /* Standalone primary CTA below the mandates grid. inline-flex with
+     a fixed width (not full-width, not centered) so it sits at the
+     container's natural inline-start edge: left under English, right
+     under Arabic (whole page is direction: rtl there), with no
+     separate RTL rule needed, same as .d-cta-book-call's icon-before-
+     text DOM order mirroring to icon-on-the-right automatically. */
+  .d-cta-book-call {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 320px;
+    height: 56px;
+    margin-top: 64px;
+    background: var(--navy);
+    color: var(--cream);
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border-radius: 999px;
+    box-shadow: 0 4px 12px rgba(21, 40, 75, 0.18);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .d-cta-book-call svg {
+    flex-shrink: 0;
+  }
+
+  .d-cta-book-call:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(21, 40, 75, 0.32);
+  }
+
   .d-mandate-num {
     font-family: var(--sans);
     font-weight: 500;
