@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="robots" content="noindex, nofollow">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
 <title>Rafeeq: the phone walkthrough</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap">
 <style>
@@ -304,6 +304,67 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
 .lvl{display:grid;grid-template-columns:1fr 1fr;gap:7px}
 .lvl div{background:var(--white);border:1px solid var(--rule);border-radius:13px;padding:9px 10px;font-size:11.5px;color:var(--muted);line-height:1.35}
 .lvl b{display:block;font-size:12.5px;color:var(--ink,#0D3B3E)}
+.ytoggle{display:flex;gap:0;background:var(--soft);border-radius:10px;padding:3px;margin-bottom:2px}
+.ytoggle button{flex:1;border:0;background:none;border-radius:8px;padding:7px 0;font-size:12.5px;font-weight:600;color:var(--muted);transition:all .2s}
+.ytoggle button.on{background:var(--white);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.yview{display:none;flex-direction:column;gap:10px}
+.yview.on{display:flex}
+/* formula cards */
+.fm-card{border:1.5px solid var(--rule);border-radius:12px;overflow:hidden;transition:border-color .2s}
+.fm-card.open{border-color:var(--fc)}
+.fm-head{display:flex;align-items:center;gap:8px;width:100%;border:0;background:none;padding:10px 12px;cursor:pointer;font-family:inherit;text-align:left}
+.fm-dot{width:10px;height:10px;border-radius:50%;background:var(--fc);flex:none}
+.fm-name{font-size:13px;font-weight:700;color:var(--ink);flex:1}
+.fm-val{font-size:14px;font-weight:700;color:var(--fc)}
+.fm-chev{font-size:10px;color:var(--muted);transition:transform .2s}
+.fm-card.open .fm-chev{transform:rotate(180deg)}
+.fm-light{font-size:11.5px;color:var(--muted);padding:0 12px 10px;line-height:1.3}
+.fm-detail{display:none;padding:0 12px 10px;border-top:1px solid var(--rule);margin:0 8px}
+.fm-card.open .fm-detail{display:block;padding-top:8px}
+.fm-row{display:flex;justify-content:space-between;font-size:11.5px;padding:4px 0;color:var(--ink)}
+.fm-row b{color:var(--fc);font-size:12px}
+.fm-eq{font-size:11px;color:var(--muted);padding:6px 0 2px;border-top:1px dashed var(--rule);margin-top:4px;font-family:'IBM Plex Mono',monospace}
+.fm-eq b{color:var(--fc);font-size:12px}
+/* calc expandable rows */
+.cs-exp{border-bottom:1px solid var(--rule)}
+.cs-exp:last-of-type{border:0}
+.cs-exp-head{display:flex;align-items:center;width:100%;border:0;background:none;padding:8px 0;cursor:pointer;font-family:inherit;font-size:12.5px}
+.cs-exp-head span:first-child{flex:1;text-align:left}
+.cs-exp-head.plus span:first-child::before{content:"+";color:var(--green);font-weight:700;margin-right:4px}
+.cs-exp-head.minus b{color:var(--red)}
+.cs-exp-head .fm-chev{margin-left:6px;font-size:9px;color:var(--muted);transition:transform .2s}
+.cs-exp.open .fm-chev{transform:rotate(180deg)}
+.cs-exp-detail{display:none;padding:0 0 8px 16px}
+.cs-exp.open .cs-exp-detail{display:block}
+.cs-exp-detail .fm-row{padding:3px 0}
+.cs-exp-detail .fm-row b{font-size:11px;color:var(--muted)}
+.cs-exp-detail .fm-eq{font-size:10.5px;border-top:1px dashed var(--rule);margin-top:4px;padding-top:4px}
+.calc-scenario{background:var(--teal);color:#fff;border-radius:14px;padding:12px 14px}
+.cs-head{margin-bottom:8px}
+.cs-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--gold)}
+.cs-row{display:flex;justify-content:space-between;font-size:12.5px;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.cs-row:last-child{border:0}
+.cs-row b{color:var(--gold)}
+.calc-stack{background:var(--white);border:1px solid var(--rule);border-radius:14px;padding:10px 14px}
+.cs-line{display:flex;justify-content:space-between;font-size:12.5px;padding:6px 0;border-bottom:1px solid var(--rule)}
+.cs-line:last-child{border:0}
+.cs-line.plus span::before{content:"+";color:var(--green);font-weight:700;margin-right:4px}
+.cs-line.minus span::before{content:"";margin-right:0}
+.cs-line.minus b{color:var(--red)}
+.cs-total{display:flex;justify-content:space-between;font-size:14px;font-weight:700;padding:10px 14px 8px;border-top:2px solid var(--teal);margin:0 -14px;padding-left:14px;padding-right:14px}
+.cs-total b{color:var(--teal)}
+.calc-roi{text-align:center;padding:14px 0 4px}
+.roi-num{font-size:36px;font-weight:700;color:var(--gold);line-height:1}
+.roi-label{font-size:12px;color:var(--muted);margin-top:4px}
+.expand-flow{display:flex;flex-direction:column;align-items:stretch;gap:0}
+.ef-step{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;border:1.5px solid rgba(255,255,255,.15)}
+.ef-step b{display:block;font-size:13px;color:#fff}
+.ef-step span{font-size:11.5px;color:#A9C4BF;line-height:1.35}
+.ef-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:none}
+.ef-start .ef-icon{background:var(--teal2)}
+.ef-expand .ef-icon{background:var(--gold)}
+.ef-system .ef-icon{background:var(--gold)}
+.ef-arrow{display:flex;justify-content:center;padding:4px 0}
 .restart{align-self:center;border:1.5px solid rgba(255,255,255,.45);background:transparent;color:#fff;border-radius:20px;padding:9px 16px;font-size:13px;font-weight:600;display:inline-flex;gap:7px;align-items:center}
 </style>
 </head>
@@ -319,10 +380,10 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
 <section class="f cover dk" data-dark data-t="Rafeeq" data-s="Start here">
   <div>
     <div class="row" style="gap:10px;margin-bottom:16px"><img src="/rafeeq/assets/hhc-white.png" alt="Health Holding Co" style="height:58px;width:auto;display:block"><span class="xs" style="color:#A9C4BF;border-left:1px solid rgba(255,255,255,.25);padding-left:10px;line-height:1.35">Prepared for<br>Health Holding</span></div>
-    <div class="k">A neighbourhood health network for HHC</div>
+    <div class="k">A neighborhood health network for HHC</div>
     <div class="ar big" style="margin-top:14px">رفيق</div>
     <div class="en">Rafeeq</div>
-    <div class="tag">Your neighbourhood's companion<br><span class="ar" style="color:var(--gold)">رفيقك في حيّك</span></div>
+    <div class="tag">Your neighborhood's companion<br><span class="ar" style="color:var(--gold)">رفيقك في حيّك</span></div>
   </div>
   <svg class="town" viewBox="0 0 340 170" aria-hidden="true">
     <path d="M0 150 Q 90 120 170 140 T 340 128" stroke="#E3A72F" stroke-width="3" fill="none" stroke-dasharray="2 7" stroke-linecap="round"/>
@@ -366,21 +427,21 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
 <section class="f" data-t="The Saudi case" data-s="What the evidence says">
   <div class="k">1 · The shift</div>
   <h2>Half of Saudi disease burden is modifiable.</h2>
-  <div class="stat" style="--c:var(--red)"><div class="n">50%</div><div class="t"><b>of the disease burden</b> comes from risks people and places can change<small>Among the highest of 21 countries analysed</small></div></div>
+  <div class="stat" style="--c:var(--red)"><div class="n">50%</div><div class="t"><b>of the disease burden</b> comes from risks people and places can change<small>Among the highest of 21 countries analyzed</small></div></div>
   <div class="stat" style="--c:var(--goldd)"><div class="n">+10.6%</div><div class="t"><b>GDP uplift by 2050</b> if those risks were removed, about $195B<small>One of the largest in the sample</small></div></div>
   <div class="stat" style="--c:var(--teal2)"><div class="n">19 of 23</div><div class="t"><b>drivers of health</b> sit outside the healthcare system<small>Food, movement, sleep, belonging, surroundings</small></div></div>
-  <div class="quote"><div class="big" style="font-size:20px;line-height:1.2">Rafeeq goes after the share a neighbourhood can move.</div><p class="sm" style="color:#CFE0DC;margin-top:6px">Figures are an upper bound that assumes every risk is removed. They show scale, not a forecast.</p></div>
+  <div class="quote"><div class="big" style="font-size:20px;line-height:1.2">Rafeeq goes after the share a neighborhood can move.</div><p class="sm" style="color:#CFE0DC;margin-top:6px">Figures are an upper bound that assumes every risk is removed. They show scale, not a forecast.</p></div>
   <div class="src">McKinsey Health Institute, The future of healthy living: A $16.4 trillion opportunity, September 2026.</div>
 </section>
 
 <!-- 3 DETERMINANTS -->
 <section class="f" data-t="Health is local" data-s="What really drives health">
   <div class="k">1 · The shift</div>
-  <h2>Health is made in the neighbourhood.</h2>
+  <h2>Health is made in the neighborhood.</h2>
   <p class="sm mut">What shapes health, by weight:</p>
   <div class="stack">
     <div style="flex:40;background:var(--teal)"><b>40%</b>Social and economic</div>
-    <div style="flex:30;background:var(--teal2)"><b>30%</b>Behaviours</div>
+    <div style="flex:30;background:var(--teal2)"><b>30%</b>Behaviors</div>
     <div style="flex:20;background:var(--gold);color:var(--teal)"><b>20%</b>Care</div>
     <div style="flex:10;background:var(--sage);padding:0 4px"><b>10%</b></div>
   </div>
@@ -412,8 +473,8 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
   </div>
   <div class="card gap">
     <div><i>1</i><span>Five apps, five calendars, no thread between them.</span></div>
-    <div><i>2</i><span>Nobody sees a neighbourhood's health as one picture.</span></div>
-    <div><i>3</i><span>Nobody is paid when a neighbourhood gets healthier. Except HHC.</span></div>
+    <div><i>2</i><span>Nobody sees a neighborhood's health as one picture.</span></div>
+    <div><i>3</i><span>Nobody is paid when a neighborhood gets healthier. Except HHC.</span></div>
   </div>
   <div class="quote" style="padding:13px 14px"><p style="font-size:14.5px"><b style="color:var(--gold)">So HHC is the natural orchestrator.</b> Not another campaign: the layer that connects the existing ones, street by street.</p></div>
 </section>
@@ -421,15 +482,15 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
 <!-- 5 CONCEPT -->
 <section class="f" data-t="The idea" data-s="Three proven models">
   <div class="k">2 · The idea</div>
-  <h2>Three proven models, one neighbourhood network.</h2>
+  <h2>Three proven models, one neighborhood network.</h2>
   <div class="eq">
-    <div class="card"><div class="ico" style="background:var(--green)"><i data-i="home"></i></div><div><h3>Nextdoor</h3><p class="sm mut">Verified neighbours, safety alerts, groups, events, a local market. 110M neighbours.</p></div></div>
+    <div class="card"><div class="ico" style="background:var(--green)"><i data-i="home"></i></div><div><h3>Nextdoor</h3><p class="sm mut">Verified neighbors, safety alerts, groups, events, a local market. 110M neighbors.</p></div></div>
     <div class="op">+</div>
     <div class="card"><div class="ico" style="background:var(--gold)"><i data-i="star"></i></div><div><h3>Vitality</h3><p class="sm mut">Points for healthy acts, paid for by lower claims.</p></div></div>
     <div class="op">+</div>
-    <div class="card"><div class="ico" style="background:var(--blue)"><i data-i="pin"></i></div><div><h3>Healthy Cities</h3><p class="sm mut">Health judged neighbourhood by neighbourhood, across sectors.</p></div></div>
+    <div class="card"><div class="ico" style="background:var(--blue)"><i data-i="pin"></i></div><div><h3>Healthy Cities</h3><p class="sm mut">Health judged neighborhood by neighborhood, across sectors.</p></div></div>
     <div class="op">=</div>
-    <div class="result"><span class="ar">رفيق</span><div><b style="font-size:16px">Rafeeq</b><p class="sm" style="color:#CFE0DC">Run by HHC, powered by partners, organised by neighbourhood.</p></div></div>
+    <div class="result"><span class="ar">رفيق</span><div><b style="font-size:16px">Rafeeq</b><p class="sm" style="color:#CFE0DC">Run by HHC, powered by partners, organized by neighborhood.</p></div></div>
   </div>
   <div class="saying"><div class="ar">الرفيق قبل الطريق</div><p class="sm mut">"Choose the companion before the road." Rafeeq is the one who walks beside you.</p></div>
   <p class="sm"><b>The feeling:</b> we're not inventing community. We're bringing back the <span class="ar" style="color:var(--goldd);font-weight:700">فريج</span> fereej.</p>
@@ -442,11 +503,11 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
   <div class="abody">
     <div class="score">
       <svg class="ring" viewBox="0 0 54 54"><circle cx="27" cy="27" r="22" stroke="rgba(255,255,255,.18)" stroke-width="6" fill="none"/><circle cx="27" cy="27" r="22" stroke="#E3A72F" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="38.7" transform="rotate(-90 27 27)"/><text x="27" y="32" text-anchor="middle" fill="#fff" font-size="15" font-weight="700" font-family="IBM Plex Sans, Arial, sans-serif">72</text></svg>
-      <div><b>Neighbourhood score</b><div class="sm">Up 4 this month · 2nd of 14 in the cluster</div></div>
+      <div><b>Neighborhood score</b><div class="sm">Up 4 this month · 2nd of 14 in the cluster</div></div>
     </div>
     <div class="post" style="--c:var(--red)"><div class="pi"><i data-i="bolt"></i></div><div class="pb"><div class="who"><span class="live">LIVE TONIGHT</span></div><div class="tx"><b>90-minute drop:</b> most steps from Maghrib to Isha. Al-Yasmin vs Al-Malqa.</div><div class="act"><span class="xs">Double points</span><button class="join" data-pts="50" data-msg="+50 · you're in the drop">Join</button></div></div></div>
-    <div class="post" style="--c:var(--teal2)"><div class="pi"><i data-i="walk"></i></div><div class="pb"><div class="who"><b>Saqr_B3</b> · Walking circle</div><div class="tx">After-Isha walk from the mosque gate. 18 neighbours going.</div><svg class="thumb" preserveAspectRatio="xMidYMid slice" viewBox="0 0 300 96" aria-hidden="true"><defs><linearGradient id="dk1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d4f60"/><stop offset="1" stop-color="#3a7d86"/></linearGradient></defs><rect width="300" height="96" fill="url(#dk1)"/><circle cx="246" cy="24" r="9" fill="#FBE3A8"/><circle cx="250" cy="21" r="8" fill="#245a68"/><g fill="#9DBAB5"><circle cx="40" cy="12" r="1"/><circle cx="120" cy="18" r="1"/><circle cx="190" cy="9" r="1"/><circle cx="280" cy="40" r="1"/></g><g fill="#0D3B3E"><rect x="22" y="44" width="70" height="36"/><path d="M34 46a23 21 0 0 1 46 0z"/><rect x="100" y="20" width="8" height="60"/><path d="M98 22l6-10 6 10z"/><rect x="200" y="50" width="40" height="30"/><rect x="246" y="42" width="44" height="38"/></g><g fill="#E3A72F"><rect x="48" y="58" width="6" height="10" rx="3"/><rect x="60" y="58" width="6" height="10" rx="3"/><rect x="208" y="58" width="6" height="7"/><rect x="226" y="58" width="6" height="7" opacity=".4"/><rect x="256" y="52" width="6" height="7"/><rect x="274" y="52" width="6" height="7"/></g><rect y="80" width="300" height="16" fill="#0b2f31"/><path d="M0 88h300" stroke="#E3A72F" stroke-width="1.5" stroke-dasharray="3 5"/><g fill="#fff"><circle cx="132" cy="64" r="3.4"/><rect x="129" y="68" width="6" height="12" rx="3"/><circle cx="146" cy="64" r="3.4"/><rect x="143" y="68" width="6" height="12" rx="3"/><circle cx="158" cy="67" r="2.6"/><rect x="155.8" y="70" width="4.6" height="9" rx="2.3"/><circle cx="172" cy="64" r="3.4"/><rect x="169" y="68" width="6" height="12" rx="3"/><circle cx="186" cy="64" r="3.4"/><rect x="183" y="68" width="6" height="12" rx="3"/></g></svg><div class="act"><span class="xs">+50 per walk</span><button class="join" data-pts="50" data-msg="+50 · see you at the gate">Join</button></div></div></div>
-    <div class="post" style="--c:var(--gold)"><div class="pi"><i data-i="car"></i></div><div class="pb"><div class="who"><b>Carpool match</b></div><div class="tx">3 neighbours on your block work near KAFD. Share the ride.</div><div class="act"><span class="xs">+15 per shared ride</span><button class="join" data-pts="15" data-msg="+15 · ride shared">Match</button></div></div></div>
+    <div class="post" style="--c:var(--teal2)"><div class="pi"><i data-i="walk"></i></div><div class="pb"><div class="who"><b>Saqr_B3</b> · Walking circle</div><div class="tx">After-Isha walk from the mosque gate. 18 neighbors going.</div><svg class="thumb" preserveAspectRatio="xMidYMid slice" viewBox="0 0 300 96" aria-hidden="true"><defs><linearGradient id="dk1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1d4f60"/><stop offset="1" stop-color="#3a7d86"/></linearGradient></defs><rect width="300" height="96" fill="url(#dk1)"/><circle cx="246" cy="24" r="9" fill="#FBE3A8"/><circle cx="250" cy="21" r="8" fill="#245a68"/><g fill="#9DBAB5"><circle cx="40" cy="12" r="1"/><circle cx="120" cy="18" r="1"/><circle cx="190" cy="9" r="1"/><circle cx="280" cy="40" r="1"/></g><g fill="#0D3B3E"><rect x="22" y="44" width="70" height="36"/><path d="M34 46a23 21 0 0 1 46 0z"/><rect x="100" y="20" width="8" height="60"/><path d="M98 22l6-10 6 10z"/><rect x="200" y="50" width="40" height="30"/><rect x="246" y="42" width="44" height="38"/></g><g fill="#E3A72F"><rect x="48" y="58" width="6" height="10" rx="3"/><rect x="60" y="58" width="6" height="10" rx="3"/><rect x="208" y="58" width="6" height="7"/><rect x="226" y="58" width="6" height="7" opacity=".4"/><rect x="256" y="52" width="6" height="7"/><rect x="274" y="52" width="6" height="7"/></g><rect y="80" width="300" height="16" fill="#0b2f31"/><path d="M0 88h300" stroke="#E3A72F" stroke-width="1.5" stroke-dasharray="3 5"/><g fill="#fff"><circle cx="132" cy="64" r="3.4"/><rect x="129" y="68" width="6" height="12" rx="3"/><circle cx="146" cy="64" r="3.4"/><rect x="143" y="68" width="6" height="12" rx="3"/><circle cx="158" cy="67" r="2.6"/><rect x="155.8" y="70" width="4.6" height="9" rx="2.3"/><circle cx="172" cy="64" r="3.4"/><rect x="169" y="68" width="6" height="12" rx="3"/><circle cx="186" cy="64" r="3.4"/><rect x="183" y="68" width="6" height="12" rx="3"/></g></svg><div class="act"><span class="xs">+50 per walk</span><button class="join" data-pts="50" data-msg="+50 · see you at the gate">Join</button></div></div></div>
+    <div class="post" style="--c:var(--gold)"><div class="pi"><i data-i="car"></i></div><div class="pb"><div class="who"><b>Carpool match</b></div><div class="tx">3 neighbors on your block work near KAFD. Share the ride.</div><div class="act"><span class="xs">+15 per shared ride</span><button class="join" data-pts="15" data-msg="+15 · ride shared">Match</button></div></div></div>
     <div class="post" style="--c:var(--teal)"><div class="pi"><i data-i="pulse"></i></div><div class="pb"><div class="who"><b>From HHC</b> · Al-Yasmin primary care</div><div class="tx">Free labs on Saturday, 8 to 12. Bring the family.</div><div class="act"><span class="xs">+300, +200 family bonus</span><button class="join" data-pts="300" data-msg="+300 · labs booked">Book</button></div></div></div>
   </div>
   <div class="tabs"></div>
@@ -485,11 +546,11 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
 
 <!-- 9 APP REWARDS -->
 <section class="f app" data-t="The app: Rewards" data-s="Prizes people talk about" data-tab="rewards">
-  <div class="cap"><i data-i="hand"></i><span><b>Prizes for everyone:</b> the neighbourhood, the family and the individual.</span></div>
+  <div class="cap"><i data-i="hand"></i><span><b>Prizes for everyone:</b> the neighborhood, the family and the individual.</span></div>
   <div class="ahead"><div class="where"><i data-i="gift" style="color:var(--red)"></i><div>Rewards<small>Funded by partners</small></div></div><span class="pts"><i data-i="star"></i><span class="ptsv">1,240</span></span></div>
   <div class="abody">
-    <div class="rw" style="background:var(--teal)"><div class="t"><i data-i="tent" style="color:var(--gold)"></i>Souq Rafeeq · monthly winner</div><svg class="scene" preserveAspectRatio="xMidYMid slice" viewBox="0 0 300 92" aria-hidden="true"><rect width="300" height="92" fill="#174f53"/><path d="M0 14 Q75 30 150 14 T300 14" stroke="#9DBAB5" fill="none"/><g><path d="M14 17l6 10 6-9z" fill="#E3A72F"/><path d="M40 21l6 10 6-9z" fill="#C8553D"/><path d="M66 24l6 10 6-9z" fill="#4C8A3F"/><path d="M92 24l6 10 6-9z" fill="#3A6EA5"/><path d="M118 20l6 10 6-9z" fill="#E3A72F"/><path d="M166 17l6 10 6-9z" fill="#C8553D"/><path d="M192 21l6 10 6-9z" fill="#4C8A3F"/><path d="M218 24l6 10 6-9z" fill="#E3A72F"/><path d="M244 24l6 10 6-9z" fill="#3A6EA5"/><path d="M270 20l6 10 6-9z" fill="#C8553D"/></g><g><rect x="16" y="50" width="70" height="30" fill="#E3ECE9"/><path d="M12 50h78l-6-12H18z" fill="#C8553D"/><path d="M26 38l-4 12M38 38v12M50 38v12M62 38v12M74 38l4 12" stroke="#fff" stroke-width="4" opacity=".55"/><path d="M51 58v10M46 63h10" stroke="#C8553D" stroke-width="3" stroke-linecap="round"/><rect x="114" y="50" width="70" height="30" fill="#E3ECE9"/><path d="M110 50h78l-6-12h-66z" fill="#E3A72F"/><path d="M124 38l-4 12M136 38v12M148 38v12M160 38v12M172 38l4 12" stroke="#fff" stroke-width="4" opacity=".55"/><circle cx="140" cy="64" r="5" fill="#4C8A3F"/><circle cx="156" cy="64" r="5" fill="#C8553D"/><rect x="212" y="50" width="70" height="30" fill="#E3ECE9"/><path d="M208 50h78l-6-12h-66z" fill="#2E8C7E"/><path d="M222 38l-4 12M234 38v12M246 38v12M258 38v12M270 38l4 12" stroke="#fff" stroke-width="4" opacity=".55"/><path d="M240 70l7-12 7 12z" fill="#E3A72F"/></g><rect y="80" width="300" height="12" fill="#0b2f31"/><g fill="#fff"><circle cx="100" cy="72" r="3"/><rect x="97.5" y="75" width="5" height="9" rx="2.5"/><circle cx="196" cy="72" r="3"/><rect x="193.5" y="75" width="5" height="9" rx="2.5"/><circle cx="204" cy="75" r="2.2"/><rect x="202" y="77" width="4" height="7" rx="2"/></g></svg><p>The travelling fair comes to the winning neighbourhood for a weekend.</p><ul><li>Pop-up HHC clinic</li><li>Healthy food trucks</li><li>Kids' sports zone</li><li>Makers' market</li><li>Family fun run</li><li>The Rafeeq Cup</li></ul></div>
-    <div class="rw" style="background:var(--green)"><div class="t"><i data-i="leaf"></i>Season prize · champion neighbourhood</div><svg class="scene" preserveAspectRatio="xMidYMid slice" viewBox="0 0 300 84" aria-hidden="true"><rect width="300" height="84" fill="#3f7a34"/><path d="M56 14L186 6L140 34z" fill="#F6E3B8"/><path d="M56 14v46M186 6v54M140 34v26" stroke="#DDEDD8" stroke-width="2"/><path d="M0 70C80 54 200 86 300 64V84H0z" fill="#35662B"/><path d="M20 76C100 60 190 84 290 66" stroke="#E3A72F" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="1 9"/><g fill="#9fd08f"><circle cx="230" cy="40" r="16"/><circle cx="250" cy="34" r="14"/><circle cx="270" cy="44" r="15"/><circle cx="30" cy="40" r="14"/></g><path d="M250 46v20M30 50v18" stroke="#2a4f22" stroke-width="4"/><rect x="100" y="52" width="40" height="5" rx="2" fill="#8C5E0A"/><path d="M104 57v8M136 57v8" stroke="#8C5E0A" stroke-width="3"/><rect x="196" y="6" width="78" height="13" rx="3" fill="#fff"/><text x="235" y="15.5" text-anchor="middle" font-size="7.5" font-weight="700" fill="#35662B" font-family="IBM Plex Sans, Arial, sans-serif">AL-YASMIN GARDEN</text></svg><p>A lasting upgrade named for the winner: an upgraded neighbourhood garden, a shaded walking track or an outdoor gym.</p></div>
+    <div class="rw" style="background:var(--teal)"><div class="t"><i data-i="tent" style="color:var(--gold)"></i>Souq Rafeeq · monthly winner</div><svg class="scene" preserveAspectRatio="xMidYMid slice" viewBox="0 0 300 92" aria-hidden="true"><rect width="300" height="92" fill="#174f53"/><path d="M0 14 Q75 30 150 14 T300 14" stroke="#9DBAB5" fill="none"/><g><path d="M14 17l6 10 6-9z" fill="#E3A72F"/><path d="M40 21l6 10 6-9z" fill="#C8553D"/><path d="M66 24l6 10 6-9z" fill="#4C8A3F"/><path d="M92 24l6 10 6-9z" fill="#3A6EA5"/><path d="M118 20l6 10 6-9z" fill="#E3A72F"/><path d="M166 17l6 10 6-9z" fill="#C8553D"/><path d="M192 21l6 10 6-9z" fill="#4C8A3F"/><path d="M218 24l6 10 6-9z" fill="#E3A72F"/><path d="M244 24l6 10 6-9z" fill="#3A6EA5"/><path d="M270 20l6 10 6-9z" fill="#C8553D"/></g><g><rect x="16" y="50" width="70" height="30" fill="#E3ECE9"/><path d="M12 50h78l-6-12H18z" fill="#C8553D"/><path d="M26 38l-4 12M38 38v12M50 38v12M62 38v12M74 38l4 12" stroke="#fff" stroke-width="4" opacity=".55"/><path d="M51 58v10M46 63h10" stroke="#C8553D" stroke-width="3" stroke-linecap="round"/><rect x="114" y="50" width="70" height="30" fill="#E3ECE9"/><path d="M110 50h78l-6-12h-66z" fill="#E3A72F"/><path d="M124 38l-4 12M136 38v12M148 38v12M160 38v12M172 38l4 12" stroke="#fff" stroke-width="4" opacity=".55"/><circle cx="140" cy="64" r="5" fill="#4C8A3F"/><circle cx="156" cy="64" r="5" fill="#C8553D"/><rect x="212" y="50" width="70" height="30" fill="#E3ECE9"/><path d="M208 50h78l-6-12h-66z" fill="#2E8C7E"/><path d="M222 38l-4 12M234 38v12M246 38v12M258 38v12M270 38l4 12" stroke="#fff" stroke-width="4" opacity=".55"/><path d="M240 70l7-12 7 12z" fill="#E3A72F"/></g><rect y="80" width="300" height="12" fill="#0b2f31"/><g fill="#fff"><circle cx="100" cy="72" r="3"/><rect x="97.5" y="75" width="5" height="9" rx="2.5"/><circle cx="196" cy="72" r="3"/><rect x="193.5" y="75" width="5" height="9" rx="2.5"/><circle cx="204" cy="75" r="2.2"/><rect x="202" y="77" width="4" height="7" rx="2"/></g></svg><p>The traveling fair comes to the winning neighborhood for a weekend.</p><ul><li>Pop-up HHC clinic</li><li>Healthy food trucks</li><li>Kids' sports zone</li><li>Makers' market</li><li>Family fun run</li><li>The Rafeeq Cup</li></ul></div>
+    <div class="rw" style="background:var(--green)"><div class="t"><i data-i="leaf"></i>Season prize · champion neighborhood</div><svg class="scene" preserveAspectRatio="xMidYMid slice" viewBox="0 0 300 84" aria-hidden="true"><rect width="300" height="84" fill="#3f7a34"/><path d="M56 14L186 6L140 34z" fill="#F6E3B8"/><path d="M56 14v46M186 6v54M140 34v26" stroke="#DDEDD8" stroke-width="2"/><path d="M0 70C80 54 200 86 300 64V84H0z" fill="#35662B"/><path d="M20 76C100 60 190 84 290 66" stroke="#E3A72F" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="1 9"/><g fill="#9fd08f"><circle cx="230" cy="40" r="16"/><circle cx="250" cy="34" r="14"/><circle cx="270" cy="44" r="15"/><circle cx="30" cy="40" r="14"/></g><path d="M250 46v20M30 50v18" stroke="#2a4f22" stroke-width="4"/><rect x="100" y="52" width="40" height="5" rx="2" fill="#8C5E0A"/><path d="M104 57v8M136 57v8" stroke="#8C5E0A" stroke-width="3"/><rect x="196" y="6" width="78" height="13" rx="3" fill="#fff"/><text x="235" y="15.5" text-anchor="middle" font-size="7.5" font-weight="700" fill="#35662B" font-family="IBM Plex Sans, Arial, sans-serif">AL-YASMIN GARDEN</text></svg><p>A lasting upgrade named for the winner: an upgraded neighborhood garden, a shaded walking track or an outdoor gym.</p></div>
     <div class="rw" style="background:var(--red)"><div class="t"><i data-i="phone"></i>iPhone draw · this month</div><div class="row" style="gap:12px;align-items:center"><svg viewBox="0 0 44 72" style="width:40px;height:66px;flex:none"><defs><linearGradient id="phg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E3A72F"/><stop offset="1" stop-color="#7a2e20"/></linearGradient></defs><rect x="2" y="2" width="40" height="68" rx="9" fill="#1B2A33"/><rect x="5" y="5" width="34" height="62" rx="7" fill="url(#phg)"/><rect x="16" y="8" width="12" height="4" rx="2" fill="#1B2A33"/></svg><p style="margin:0">Half to the top scorers in the cluster, half drawn among everyone above the threshold. Anyone who takes part has a chance.</p></div><div class="prog"><i id="drawbar" style="width:83%"></i></div><p id="drawtx" style="font-size:12px"><b>260 points</b> to enter the draw</p></div>
   </div>
   <div class="tabs"></div>
@@ -515,35 +576,163 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
 <section class="f" data-t="One yardstick" data-s="One score at every level">
   <div class="k">3 · The rhythm</div>
   <h2>One score, from a person to a cluster.</h2>
-  <div class="yard">
-    <svg class="rg" viewBox="0 0 54 54"><circle cx="27" cy="27" r="22" stroke="rgba(255,255,255,.18)" stroke-width="6" fill="none"/><circle cx="27" cy="27" r="22" stroke="#E3A72F" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="38.7" transform="rotate(-90 27 27)"/><text x="27" y="32" text-anchor="middle" fill="#fff" font-size="15" font-weight="700" font-family="IBM Plex Sans, Arial, sans-serif">72</text></svg>
-    <div class="bars">
-      <div style="--c:var(--teal2)"><span>Move</span><u><i style="width:78%"></i></u><b>78</b></div>
-      <div style="--c:var(--red)"><span>Eat</span><u><i style="width:64%"></i></u><b>64</b></div>
-      <div style="--c:var(--gold)"><span>Connect</span><u><i style="width:70%"></i></u><b>70</b></div>
-      <div style="--c:var(--blue)"><span>Safe</span><u><i style="width:81%"></i></u><b>81</b></div>
-      <div style="--c:var(--green)"><span>Green</span><u><i style="width:66%"></i></u><b>66</b></div>
-      <div style="--c:var(--goldd)"><span>Check</span><u><i style="width:74%"></i></u><b>74</b></div>
+  <div class="ytoggle" id="ytoggle">
+    <button class="on" data-yv="score">The score</button>
+    <button data-yv="formula">How we score</button>
+    <button data-yv="calc">Worked example</button>
+  </div>
+  <div class="yview yv-score on" id="yv-score">
+    <div class="yard">
+      <svg class="rg" viewBox="0 0 54 54"><circle cx="27" cy="27" r="22" stroke="rgba(255,255,255,.18)" stroke-width="6" fill="none"/><circle cx="27" cy="27" r="22" stroke="#E3A72F" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="38.7" transform="rotate(-90 27 27)"/><text x="27" y="32" text-anchor="middle" fill="#fff" font-size="15" font-weight="700" font-family="IBM Plex Sans, Arial, sans-serif">72</text></svg>
+      <div class="bars">
+        <div style="--c:var(--teal2)"><span>Move</span><u><i style="width:78%"></i></u><b>78</b></div>
+        <div style="--c:var(--red)"><span>Eat</span><u><i style="width:64%"></i></u><b>64</b></div>
+        <div style="--c:var(--gold)"><span>Connect</span><u><i style="width:70%"></i></u><b>70</b></div>
+        <div style="--c:var(--blue)"><span>Safe</span><u><i style="width:81%"></i></u><b>81</b></div>
+        <div style="--c:var(--green)"><span>Green</span><u><i style="width:66%"></i></u><b>66</b></div>
+        <div style="--c:var(--goldd)"><span>Check</span><u><i style="width:74%"></i></u><b>74</b></div>
+      </div>
     </div>
+    <div class="lvl">
+      <div><b>You</b>Your own six scores, private to you</div>
+      <div><b>Your block</b>Rolled up, and the team in the weekly race</div>
+      <div><b>Your neighborhood</b>The score on every resident's Home</div>
+      <div><b>The cluster</b>What HHC steers by and reports</div>
+    </div>
+    <p class="sm mut">The same six dimensions at every level, so a gain on one street shows up in the cluster number.</p>
   </div>
-  <div class="lvl">
-    <div><b>You</b>Your own six scores, private to you</div>
-    <div><b>Your block</b>Rolled up, and the team in the weekly race</div>
-    <div><b>Your neighbourhood</b>The score on every resident's Home</div>
-    <div><b>The cluster</b>What HHC steers by and reports</div>
+  <div class="yview yv-formula" id="yv-formula">
+    <div class="fm-card" style="--fc:var(--teal2)">
+      <button class="fm-head" data-fm><span class="fm-dot"></span><span class="fm-name">Move</span><span class="fm-val">78</span><span class="fm-chev">&#9662;</span></button>
+      <div class="fm-light">Steps + active minutes + sleep hours</div>
+      <div class="fm-detail">
+        <div class="fm-row"><span>Daily steps (target 8K)</span><b>0.35</b></div>
+        <div class="fm-row"><span>Active minutes (target 150/wk)</span><b>0.35</b></div>
+        <div class="fm-row"><span>Sleep 7-9h regularity</span><b>0.20</b></div>
+        <div class="fm-row"><span>Streak bonus (7d+)</span><b>0.10</b></div>
+        <div class="fm-eq">0.35(82) + 0.35(76) + 0.20(74) + 0.10(80) = <b>78</b></div>
+      </div>
+    </div>
+    <div class="fm-card" style="--fc:var(--red)">
+      <button class="fm-head" data-fm><span class="fm-dot"></span><span class="fm-name">Eat</span><span class="fm-val">64</span><span class="fm-chev">&#9662;</span></button>
+      <div class="fm-light">Fruit/veg intake + sugar + water</div>
+      <div class="fm-detail">
+        <div class="fm-row"><span>Fruit and veg servings (target 5/day)</span><b>0.35</b></div>
+        <div class="fm-row"><span>Added sugar below threshold</span><b>0.30</b></div>
+        <div class="fm-row"><span>Water intake (target 2L/day)</span><b>0.20</b></div>
+        <div class="fm-row"><span>Home-cooked meals logged</span><b>0.15</b></div>
+        <div class="fm-eq">0.35(70) + 0.30(52) + 0.20(68) + 0.15(72) = <b>64</b></div>
+      </div>
+    </div>
+    <div class="fm-card" style="--fc:var(--gold)">
+      <button class="fm-head" data-fm><span class="fm-dot"></span><span class="fm-name">Connect</span><span class="fm-val">70</span><span class="fm-chev">&#9662;</span></button>
+      <div class="fm-light">Social events + volunteering + loneliness screen</div>
+      <div class="fm-detail">
+        <div class="fm-row"><span>Community events attended</span><b>0.30</b></div>
+        <div class="fm-row"><span>Volunteering hours</span><b>0.25</b></div>
+        <div class="fm-row"><span>Loneliness screen (UCLA-3)</span><b>0.25</b></div>
+        <div class="fm-row"><span>Neighbour interactions logged</span><b>0.20</b></div>
+        <div class="fm-eq">0.30(74) + 0.25(68) + 0.25(66) + 0.20(72) = <b>70</b></div>
+      </div>
+    </div>
+    <div class="fm-card" style="--fc:var(--blue)">
+      <button class="fm-head" data-fm><span class="fm-dot"></span><span class="fm-name">Safe</span><span class="fm-val">81</span><span class="fm-chev">&#9662;</span></button>
+      <div class="fm-light">Walkability + lighting + traffic incidents</div>
+      <div class="fm-detail">
+        <div class="fm-row"><span>Walkability survey score</span><b>0.30</b></div>
+        <div class="fm-row"><span>Street lighting adequacy</span><b>0.25</b></div>
+        <div class="fm-row"><span>Traffic incidents (inverse)</span><b>0.25</b></div>
+        <div class="fm-row"><span>Resident safety perception</span><b>0.20</b></div>
+        <div class="fm-eq">0.30(84) + 0.25(80) + 0.25(78) + 0.20(82) = <b>81</b></div>
+      </div>
+    </div>
+    <div class="fm-card" style="--fc:var(--green)">
+      <button class="fm-head" data-fm><span class="fm-dot"></span><span class="fm-name">Green</span><span class="fm-val">66</span><span class="fm-chev">&#9662;</span></button>
+      <div class="fm-light">Air quality + green space + heat index</div>
+      <div class="fm-detail">
+        <div class="fm-row"><span>PM2.5 / AQI reading</span><b>0.35</b></div>
+        <div class="fm-row"><span>Green space within 400m</span><b>0.30</b></div>
+        <div class="fm-row"><span>Urban heat island index</span><b>0.20</b></div>
+        <div class="fm-row"><span>Tree canopy coverage</span><b>0.15</b></div>
+        <div class="fm-eq">0.35(62) + 0.30(72) + 0.20(64) + 0.15(66) = <b>66</b></div>
+      </div>
+    </div>
+    <div class="fm-card" style="--fc:var(--goldd)">
+      <button class="fm-head" data-fm><span class="fm-dot"></span><span class="fm-name">Check</span><span class="fm-val">74</span><span class="fm-chev">&#9662;</span></button>
+      <div class="fm-light">Screenings done + vaccinations + PHC visits</div>
+      <div class="fm-detail">
+        <div class="fm-row"><span>Age-appropriate screenings completed</span><b>0.35</b></div>
+        <div class="fm-row"><span>Vaccination up to date</span><b>0.30</b></div>
+        <div class="fm-row"><span>Annual PHC wellness visit</span><b>0.20</b></div>
+        <div class="fm-row"><span>PROMs questionnaire submitted</span><b>0.15</b></div>
+        <div class="fm-eq">0.35(78) + 0.30(76) + 0.20(68) + 0.15(66) = <b>74</b></div>
+      </div>
+    </div>
+    <p class="sm mut">Weights are illustrative. Real weights calibrated from Saudi burden-of-disease data once the pilot begins.</p>
   </div>
-  <p class="sm mut">The same six dimensions at every level, so a gain on one street shows up in the cluster number.</p>
+  <div class="yview yv-calc" id="yv-calc">
+    <div class="calc-scenario">
+      <div class="cs-head"><span class="cs-tag">One neighborhood, one season</span></div>
+      <div class="cs-row"><span>Residents</span><b>8,000</b></div>
+      <div class="cs-row"><span>Season</span><b>Winter</b></div>
+      <div class="cs-row"><span>Focus</span><b>Metabolic health</b></div>
+      <div class="cs-row"><span>Active (30%)</span><b>2,400</b></div>
+    </div>
+    <div class="calc-stack">
+      <div class="cs-exp" data-cx>
+        <button class="cs-exp-head plus"><span>Burden averted</span><b>SAR 827K</b><span class="fm-chev">&#9662;</span></button>
+        <div class="cs-exp-detail">
+          <div class="fm-row"><span>Diabetes risk reduction (12% of active)</span><b>SAR 414K</b></div>
+          <div class="fm-row"><span>CVD risk reduction (8% of active)</span><b>SAR 276K</b></div>
+          <div class="fm-row"><span>Obesity-related costs avoided</span><b>SAR 137K</b></div>
+          <div class="fm-eq">Based on Saudi DALY cost of SAR 48,200 and published relative risk reductions for lifestyle interventions</div>
+        </div>
+      </div>
+      <div class="cs-exp" data-cx>
+        <button class="cs-exp-head plus"><span>Early detection value</span><b>SAR 1,440K</b><span class="fm-chev">&#9662;</span></button>
+        <div class="cs-exp-detail">
+          <div class="fm-row"><span>Screenings completed (est. 720)</span><b>SAR 960K</b></div>
+          <div class="fm-row"><span>Early-stage catches (est. 24)</span><b>SAR 480K</b></div>
+          <div class="fm-eq">Late-stage treatment averages SAR 60K more per case. 720 screenings at 3.3% detection rate = 24 catches x SAR 20K saved per early catch, plus screening program value</div>
+        </div>
+      </div>
+      <div class="cs-exp" data-cx>
+        <button class="cs-exp-head plus"><span>Productivity gained</span><b>SAR 372K</b><span class="fm-chev">&#9662;</span></button>
+        <div class="cs-exp-detail">
+          <div class="fm-row"><span>Fewer sick days (est. 2.4 days/active)</span><b>SAR 248K</b></div>
+          <div class="fm-row"><span>Reduced presenteeism</span><b>SAR 124K</b></div>
+          <div class="fm-eq">Average daily wage SAR 430 x 2.4 fewer sick days x 240 working residents. Presenteeism estimated at 50% of absenteeism value</div>
+        </div>
+      </div>
+      <div class="cs-exp minus" data-cx>
+        <button class="cs-exp-head minus"><span>Program cost</span><b>- SAR 150K</b><span class="fm-chev">&#9662;</span></button>
+        <div class="cs-exp-detail">
+          <div class="fm-row"><span>Platform and AI ops</span><b>SAR 60K</b></div>
+          <div class="fm-row"><span>Community coordinator (1 FTE)</span><b>SAR 45K</b></div>
+          <div class="fm-row"><span>Rewards and partner activation</span><b>SAR 30K</b></div>
+          <div class="fm-row"><span>Events and logistics</span><b>SAR 15K</b></div>
+          <div class="fm-eq">Per neighborhood per season. Scales down with shared infrastructure across the six pilot neighborhoods</div>
+        </div>
+      </div>
+      <div class="cs-total"><span>Net health value</span><b>SAR 2,489K</b></div>
+    </div>
+    <div class="calc-roi">
+      <div class="roi-num">~17 : 1</div>
+      <div class="roi-label">return on every riyal invested</div>
+    </div>
+    <p class="sm mut">Conservative estimates using published Saudi burden-of-disease data. The model sharpens as real data replaces assumptions.</p>
+  </div>
   <div class="src">Illustrative values. Healthy living has no shared definition or measure yet; this would be the one HHC owns. Idea informed by McKinsey Health Institute, September 2026.</div>
 </section>
 
 <!-- 11 ENGINE -->
 <section class="f dk" data-dark data-t="The engine" data-s="AI behind the scenes">
   <div class="k">4 · The engine</div>
-  <h2>AI agents run hundreds of neighbourhoods. A person approves every campaign.</h2>
+  <h2>AI agents run hundreds of neighborhoods. A person approves every campaign.</h2>
   <div class="steps" id="steps"></div>
   <div class="mapbox"><svg viewBox="0 0 300 190" id="hexmap"></svg></div>
   <div class="stepd" id="stepd"></div>
-  <p class="xs">Cluster console: one map of every neighbourhood's score, the campaigns running and the fixes waiting on partners.</p>
+  <p class="xs">Cluster console: one map of every neighborhood's score, the campaigns running and the fixes waiting on partners.</p>
 </section>
 
 <!-- 12 BRIDGE -->
@@ -552,7 +741,7 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
   <h2>HHC owns three things. Everything else plugs in.</h2>
   <div class="own">
     <div class="xs" style="color:#A9C4BF">What HHC builds and owns</div>
-    <div class="g3"><div><i data-i="pin"></i>Neighbourhood map</div><div><i data-i="star"></i>Points ledger</div><div><i data-i="spark"></i>The engine</div></div>
+    <div class="g3"><div><i data-i="pin"></i>Neighborhood map</div><div><i data-i="star"></i>Points ledger</div><div><i data-i="spark"></i>The engine</div></div>
   </div>
   <div class="xs">Tap a partner</div>
   <div class="pchips" id="pchips"></div>
@@ -561,24 +750,24 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
 </section>
 
 <!-- 13 PILOT -->
-<section class="f" data-t="The pilot" data-s="Six neighbourhoods, 90 days">
+<section class="f" data-t="The pilot" data-s="Six neighborhoods, two seasons">
   <div class="k">6 · The pilot</div>
-  <h2>Start with six neighbourhoods, for one season.</h2>
+  <h2>Start with six neighborhoods, two seasons.</h2>
   <svg class="hexpilot" viewBox="0 0 290 125"><path d="M49.4 26.5 L49.4 53.5 L26.0 67.0 L2.6 53.5 L2.6 26.5 L26.0 13.0Z" fill="#fff" stroke="#D5DEDC" stroke-width="1.2"/><path d="M101.4 26.5 L101.4 53.5 L78.0 67.0 L54.6 53.5 L54.6 26.5 L78.0 13.0Z" fill="#E3A72F" stroke="#fff" stroke-width="2"/><text x="78" y="37" text-anchor="middle" font-size="9" font-weight="700" fill="#0D3B3E" font-family="IBM Plex Sans, Arial, sans-serif">LIVE 1</text><path d="M78 42l2 4 4.5.6-3.3 3 .8 4.4-4-2.1-4 2.1.8-4.4-3.3-3 4.5-.6z" fill="#0D3B3E"/><path d="M153.4 26.5 L153.4 53.5 L130.0 67.0 L106.6 53.5 L106.6 26.5 L130.0 13.0Z" fill="#EEF3F1" stroke="#9DBAB5" stroke-width="1.8" stroke-dasharray="4 3"/><text x="130" y="39.0" text-anchor="middle" font-size="7.5" font-weight="700" fill="#5C6B70" font-family="IBM Plex Sans, Arial, sans-serif">CONTROL</text><text x="130" y="51.0" text-anchor="middle" font-size="10" font-weight="700" fill="#5C6B70" font-family="IBM Plex Sans, Arial, sans-serif">1</text><path d="M205.4 26.5 L205.4 53.5 L182.0 67.0 L158.6 53.5 L158.6 26.5 L182.0 13.0Z" fill="#E3A72F" stroke="#fff" stroke-width="2"/><text x="182" y="37" text-anchor="middle" font-size="9" font-weight="700" fill="#0D3B3E" font-family="IBM Plex Sans, Arial, sans-serif">LIVE 2</text><path d="M182 42l2 4 4.5.6-3.3 3 .8 4.4-4-2.1-4 2.1.8-4.4-3.3-3 4.5-.6z" fill="#0D3B3E"/><path d="M257.4 26.5 L257.4 53.5 L234.0 67.0 L210.6 53.5 L210.6 26.5 L234.0 13.0Z" fill="#EEF3F1" stroke="#9DBAB5" stroke-width="1.8" stroke-dasharray="4 3"/><text x="234" y="39.0" text-anchor="middle" font-size="7.5" font-weight="700" fill="#5C6B70" font-family="IBM Plex Sans, Arial, sans-serif">CONTROL</text><text x="234" y="51.0" text-anchor="middle" font-size="10" font-weight="700" fill="#5C6B70" font-family="IBM Plex Sans, Arial, sans-serif">2</text><path d="M75.4 71.5 L75.4 98.5 L52.0 112.0 L28.6 98.5 L28.6 71.5 L52.0 58.0Z" fill="#EEF3F1" stroke="#9DBAB5" stroke-width="1.8" stroke-dasharray="4 3"/><text x="52" y="84.0" text-anchor="middle" font-size="7.5" font-weight="700" fill="#5C6B70" font-family="IBM Plex Sans, Arial, sans-serif">CONTROL</text><text x="52" y="96.0" text-anchor="middle" font-size="10" font-weight="700" fill="#5C6B70" font-family="IBM Plex Sans, Arial, sans-serif">3</text><path d="M127.4 71.5 L127.4 98.5 L104.0 112.0 L80.6 98.5 L80.6 71.5 L104.0 58.0Z" fill="#fff" stroke="#D5DEDC" stroke-width="1.2"/><path d="M179.4 71.5 L179.4 98.5 L156.0 112.0 L132.6 98.5 L132.6 71.5 L156.0 58.0Z" fill="#E3A72F" stroke="#fff" stroke-width="2"/><text x="156" y="82" text-anchor="middle" font-size="9" font-weight="700" fill="#0D3B3E" font-family="IBM Plex Sans, Arial, sans-serif">LIVE 3</text><path d="M156 87l2 4 4.5.6-3.3 3 .8 4.4-4-2.1-4 2.1.8-4.4-3.3-3 4.5-.6z" fill="#0D3B3E"/><path d="M231.4 71.5 L231.4 98.5 L208.0 112.0 L184.6 98.5 L184.6 71.5 L208.0 58.0Z" fill="#fff" stroke="#D5DEDC" stroke-width="1.2"/><path d="M283.4 71.5 L283.4 98.5 L260.0 112.0 L236.6 98.5 L236.6 71.5 L260.0 58.0Z" fill="#fff" stroke="#D5DEDC" stroke-width="1.2"/></svg>
-  <p class="xs" style="margin-top:-4px">One cluster: three live neighbourhoods, three matched as controls. One focus: metabolic health through food and activity, with early wins inside a year.</p>
+  <p class="xs" style="margin-top:-4px">One cluster: three live neighborhoods, three matched as controls. Two seasons to prove the model: enough time for behavior change to show in the numbers.</p>
   <div class="facts">
-    <div><b>90 days</b><span>Timed to one season, such as winter or Ramadan</span></div>
+    <div><b>Two seasons</b><span>Winter metabolic push, then spring movement campaign</span></div>
     <div><b>Partners</b><span>Municipality, Sports for All, one or two reward partners</span></div>
     <div><b>Technology</b><span>Licensed and integrated; steps from Sehhaty</span></div>
     <div><b>Team</b><span>Product lead, community managers, analyst, clinical adviser</span></div>
   </div>
   <div class="card" style="padding:10px 13px">
-    <div class="row" style="justify-content:space-between;margin-bottom:2px"><h3>Day 100 readout</h3><span class="xs">against controls</span></div>
+    <div class="row" style="justify-content:space-between;margin-bottom:2px"><h3>End-of-pilot readout</h3><span class="xs">against controls</span></div>
     <div class="meas">
-      <div><span>Active residents per neighbourhood</span><span>LEADING</span></div>
+      <div><span>Active residents per neighborhood</span><span>LEADING</span></div>
       <div><span>Screenings booked and completed</span><span>LEADING</span></div>
       <div><span>Fixes closed with partners</span><span>LEADING</span></div>
-      <div><span>Neighbourhood score movement</span><span>LEADING</span></div>
+      <div><span>Neighborhood score movement</span><span>LEADING</span></div>
       <div class="lag" style="border:0"><span>ED visits and admissions per 1,000</span><span>LAGGING</span></div>
     </div>
   </div>
@@ -599,15 +788,17 @@ p{margin:0;font-size:14.5px;line-height:1.5;text-wrap:pretty}
 </section>
 
 <!-- 15 WAYS -->
-<section class="f dk" data-dark data-t="Working together" data-s="Three ways in">
+<section class="f dk" data-dark data-t="Working together" data-s="From Rafeeq to the whole system">
   <div class="k">7 · Where I fit</div>
-  <h2>Three ways to work together.</h2>
-  <div class="ways">
-    <div class="way"><div class="n">1</div><div><b>Embed</b><span>Join existing teams and help them solve problems like this one.</span></div><span class="wi"><i data-i="people"></i></span></div>
-    <div class="way"><div class="n">2</div><div><b>Build</b><span>Take Rafeeq from pilot to scale.</span></div><span class="wi"><i data-i="bars"></i></span></div>
-    <div class="way"><div class="n">3</div><div><b>Corporate innovation hub</b><span>A small team that tests ideas with a cluster, builds the ones that work, and hands them over to the cluster to run.</span></div><span class="wi"><i data-i="flask"></i></span></div>
+  <h2>Rafeeq has an impact calculator. That opens the door.</h2>
+  <div class="expand-flow">
+    <div class="ef-step ef-start"><div class="ef-icon"><i data-i="pin"></i></div><div><b>Prove it in Rafeeq</b><span>Six neighborhoods, two seasons, one impact calculator that shows SAR return for every riyal invested.</span></div></div>
+    <div class="ef-arrow"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 5v14M5 12l7 7 7-7" stroke="var(--gold)" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="ef-step ef-expand"><div class="ef-icon"><i data-i="bars"></i></div><div><b>Expand the methodology</b><span>Apply the same measurement framework across HHC: beds, vaccines, screenings, every program gets a net health value.</span></div></div>
+    <div class="ef-arrow"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 5v14M5 12l7 7 7-7" stroke="var(--gold)" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="ef-step ef-system"><div class="ef-icon"><i data-i="spark"></i></div><div><b>One system-wide dashboard</b><span>HHC leadership sees the health return of every riyal, across every cluster, in real time.</span></div></div>
   </div>
-  <p style="font-size:19px;font-weight:600;line-height:1.35;margin-top:6px">Rafeeq is one example.<br><span style="color:var(--gold)">There are many more.</span></p>
+  <p style="font-size:15px;line-height:1.4;color:#A9C4BF;margin-top:8px;text-align:center">Rafeeq is a proof of concept.<br>The calculator is the methodology<br>that scales to everything HHC does.</p>
   <button class="restart" data-go="0"><svg class="ic" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4"/></svg>Start again</button>
 </section>
 
@@ -662,7 +853,7 @@ document.querySelectorAll('i[data-i]').forEach(el=>{el.outerHTML=svg(el.dataset.
 const frames=[...document.querySelectorAll('.f')],screen=document.getElementById('screen'),stories=document.getElementById('stories');
 let cur=0;
 frames.forEach((f,k)=>{const b=document.createElement('button');b.setAttribute('aria-label','Go to '+f.dataset.t);b.innerHTML='<i></i>';b.onclick=()=>go(k);stories.appendChild(b)});
-const tabDefs=[['home','Home','home'],['leagues','Leagues','trophy'],['earn','Earn','star'],['rewards','Rewards','gift']];
+const tabDefs=[['home','Home','home'],['earn','Earn','star'],['leagues','Leagues','trophy'],['rewards','Rewards','gift']];
 document.querySelectorAll('.f.app .tabs').forEach(t=>{const me=t.closest('.f').dataset.tab;t.innerHTML=tabDefs.map(([id,l,ic])=>'<button data-tabgo="'+id+'" class="'+(id===me?'on':'')+'">'+svg(ic)+l+'</button>').join('')});
 function go(i){
   i=Math.max(0,Math.min(frames.length-1,i));cur=i;
@@ -708,7 +899,7 @@ function drawLadder(){
 const actDefs=[
  ['Annual check-up','Once a year',500,'pulse','var(--teal)'],
  ['Flu vaccine','Once a season',300,'shield','var(--blue)'],
- ['Visit an elderly neighbour','Weekly',100,'heart','var(--goldd)'],
+ ['Visit an elderly neighbor','Weekly',100,'heart','var(--goldd)'],
  ['Join a group walk','Per event',50,'walk','var(--teal2)'],
  ['Report a leaky pipe','20 confirmed, +30 when fixed',20,'wrench','var(--red)'],
  ['Shared ride to work','Per ride',15,'car','var(--gold)'],
@@ -722,7 +913,7 @@ let bmode='week';
 function drawBoard(){
   let rows,tip;
   if(bmode==='week'){rows=[['Block 3',block,'Your block',1],['Block 5',8110,''],['Block 1',7300,''],['Block 2',6950,''],['Block 4',6120,'']];tip='<b>Weekly block race.</b> The winning block gets partner discounts all next week. Scores reset every Sunday.'}
-  else if(bmode==='month'){rows=[['Al-Malqa',41200,''],['Al-Yasmin',hood,'Your neighbourhood',1],['Al-Narjis',37450,''],['Hittin',33100,''],['Al-Aqiq',30800,'Most improved so far']];const gap=41200-hood;tip=gap>0?'<b>'+fmt(gap)+' behind Al-Malqa.</b> Close the gap: three more flu vaccines and two check-ups on your street. The winner hosts Souq Rafeeq.':'<b>Al-Yasmin leads the month!</b> Souq Rafeeq is heading your way if you hold on.'}
+  else if(bmode==='month'){rows=[['Al-Malqa',41200,''],['Al-Yasmin',hood,'Your neighborhood',1],['Al-Narjis',37450,''],['Hittin',33100,''],['Al-Aqiq',30800,'Most improved so far']];const gap=41200-hood;tip=gap>0?'<b>'+fmt(gap)+' behind Al-Malqa.</b> Close the gap: three more flu vaccines and two check-ups on your street. The winner hosts Souq Rafeeq.':'<b>Al-Yasmin leads the month!</b> Souq Rafeeq is heading your way if you hold on.'}
   else{rows=[['Al-Narjis',5,'3 + 2 league points'],['Al-Yasmin',4,'1 + 3',1],['Al-Malqa',3,'2 + 1'],['Hittin',0,''],['Al-Aqiq',0,'']];tip='<b>Season table.</b> Monthly finishes earn 3, 2 or 1 league points, so consistency wins the season prize, not one big month.'}
   rows.sort((a,b)=>b[1]-a[1]);
   document.getElementById('board').innerHTML=rows.map((r,k)=>'<div class="br'+(r[3]?' me':'')+'"><span class="rk">'+(k+1)+'</span><span>'+r[0]+(r[2]?'<small>'+r[2]+'</small>':'')+'</span><span class="v">'+fmt(r[1])+(bmode==='season'?' pts':'')+'</span></div>').join('');
@@ -735,18 +926,18 @@ let left=72*60+40;setInterval(()=>{left=left>0?left-1:90*60;const h=Math.floor(l
 function drawDraw(){const th=1500,need=Math.max(0,th-pts);document.getElementById('drawbar').style.width=Math.min(100,pts/th*100)+'%';document.getElementById('drawtx').innerHTML=need>0?'<b>'+fmt(need)+' points</b> to enter the draw':'<b>You are in this month\'s draw.</b>'}
 
 /* clocks */
-const clk=[['90-minute drop','after each drop',24,'var(--red)','bolt'],['Block race','every week',8,'var(--teal2)','home'],['Neighbourhood','every month',3,'var(--teal)','pin'],['Season table','every 12 weeks',1,'var(--gold)','trophy']];
+const clk=[['90-minute drop','after each drop',24,'var(--red)','bolt'],['Block race','every week',8,'var(--teal2)','home'],['Neighborhood','every month',3,'var(--teal)','pin'],['Season table','every 12 weeks',1,'var(--gold)','trophy']];
 document.getElementById('clocks').innerHTML=clk.map(([t,s,n,c,ic])=>{let p='';const w=220/n;for(let k=0;k<n;k++){const x=4+k*w;p+='<path d="M'+x+' 22 L'+(x+w-3)+' 6" stroke="'+c+'" stroke-width="2.5" fill="none" stroke-linecap="round"/>';if(k>0)p+='<line x1="'+x+'" y1="2" x2="'+x+'" y2="24" stroke="#9DBAB5" stroke-dasharray="2 2"/>'}return '<div class="ck"><span class="ci" style="color:'+c+'">'+svg(ic)+'</span><div><b>'+t+'</b><small>Resets '+s+'</small></div><svg viewBox="0 0 228 26" preserveAspectRatio="none">'+p+'</svg></div>'}).join('');
 
 /* engine */
 const hexes=[[60,40,72],[120,40,58],[180,40,81],[240,40,66],[30,92,63],[90,92,44],[150,92,75],[210,92,70],[270,92,55],[60,144,68],[120,144,77],[180,144,61],[240,144,49]];
 const names=['Hittin','Al-Malqa','Al-Narjis','Al-Aqiq','Al-Arid','Al-Nada','Al-Yasmin','Al-Sahafa','Al-Rabi','Al-Wadi','Al-Nafal','Al-Ghadir','Al-Qirawan'];
 const stepDefs=[
- ['Spot','Finds the neighbourhoods falling behind, and on which dimension. Al-Nada is low on Check: screenings are down.',[5],null],
- ['Pick','Chooses the challenge most likely to move it, from what worked elsewhere: a family screening day, neighbourhood against neighbourhood.',[5],null],
+ ['Spot','Finds the neighborhoods falling behind, and on which dimension. Al-Nada is low on Check: screenings are down.',[5],null],
+ ['Pick','Chooses the challenge most likely to move it, from what worked elsewhere: a family screening day, neighborhood against neighborhood.',[5],null],
  ['Localise','Sets the time, place and messenger: Saturday after Asr, at the school, announced by the imam and the school head.',[5],null],
- ['Route','Sends fixes to the right partner: lighting to the municipality, a dangerous crossing to traffic, the screening gap to the nearest primary care centre.',[5,12],null],
- ['Measure','Tracks what moved against similar neighbourhoods and feeds it back into Pick. Al-Nada: screenings up, score 44 to 57.',[5],57]
+ ['Route','Sends fixes to the right partner: lighting to the municipality, a dangerous crossing to traffic, the screening gap to the nearest primary care center.',[5,12],null],
+ ['Measure','Tracks what moved against similar neighborhoods and feeds it back into Pick. Al-Nada: screenings up, score 44 to 57.',[5],57]
 ];
 let step=0;
 function hexPath(cx,cy,r){let d='';for(let k=0;k<6;k++){const a=Math.PI/180*(60*k-30);d+=(k?'L':'M')+(cx+r*Math.cos(a)).toFixed(1)+' '+(cy+r*Math.sin(a)).toFixed(1)}return d+'Z'}
@@ -763,16 +954,16 @@ function drawEngine(){
 const V={i:['Integrate','var(--teal2)'],p:['Partner','var(--gold)'],l:['License','var(--blue)'],c:['Copy the model','var(--green)']};
 const pIcons=['wrench','walk','pulse','gift','star','trophy','heart','car','bolt','home'];
 const partners=[
- ['Balady','i','Safety and neighbourhood reports. 1.7M+ "photograph and send" reports already. Rafeeq awards points using the Balady reference number; no parallel reporting channel.'],
+ ['Balady','i','Safety and neighborhood reports. 1.7M+ "photograph and send" reports already. Rafeeq awards points using the Balady reference number; no parallel reporting channel.'],
  ['Sehhaty · Walk 30','i','Steps and the MOH walking league, 1.5M+ participants. Read steps from Sehhaty and bring MOH in as a partner rather than compete.'],
  ['HHC records','i','Screenings, vaccines and check-ups. HHC\'s own data, and Rafeeq\'s unfair advantage: no other app can verify a health act.'],
  ['Qitaf · Mokafaa · Neqaty','i','Spend points with partners through one aggregator such as Resal Connect, hosted locally and PDPL-compliant. Never build a rewards catalogue.'],
  ['Tawuniya Vitality','p','Points-for-health live in KSA since 2020, already partnered with Sports for All. Partner for insured members; Rafeeq keeps its own ledger so everyone can play.'],
  ['Sports for All','p','3,285 venues and mass events. They run the events and fairs; Rafeeq brings the crowd and the winner.'],
- ['Volunteer Portal','i','2.1M registered volunteers. Verified neighbour-care hours become points.'],
+ ['Volunteer Portal','i','2.1M registered volunteers. Verified neighbor-care hours become points.'],
  ['Careem · Swvl','p','No mature Saudi commuter carpool app exists. Go through employers with Careem for Business or Swvl, and start with a simple block carpool board.'],
  ['Challenge engine','l','White-label team challenges with wearable integrations (YuMuuv and similar). License for the pilot; rebuild only once proven.'],
- ['Nextdoor','c','Not in the Kingdom, so copy the model: verified neighbours, free official agency pages, community posts only.']
+ ['Nextdoor','c','Not in the Kingdom, so copy the model: verified neighbors, free official agency pages, community posts only.']
 ];
 let pk=0;
 function drawBridge(){
@@ -802,6 +993,33 @@ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refit);
 fitAll();
 const h=parseInt((location.hash||'').replace('#s',''),10);go(h>=1&&h<=frames.length?h-1:0);
 window.addEventListener('hashchange',()=>{const n=parseInt(location.hash.replace('#s',''),10);if(n>=1&&n<=frames.length&&n-1!==cur)go(n-1)});
+/* yardstick toggle */
+document.querySelectorAll('#ytoggle button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#ytoggle button').forEach(x=>x.classList.toggle('on',x===b));
+  ['score','formula','calc'].forEach(v=>{
+    const el=document.getElementById('yv-'+v);
+    if(el) el.classList.toggle('on',b.dataset.yv===v);
+  });
+  setTimeout(refit,30);
+});
+/* formula card expand/collapse */
+document.querySelectorAll('[data-fm]').forEach(btn=>btn.onclick=()=>{
+  const card=btn.closest('.fm-card');
+  card.classList.toggle('open');
+  setTimeout(refit,30);
+});
+/* calc row expand/collapse */
+document.querySelectorAll('[data-cx] .cs-exp-head').forEach(btn=>btn.onclick=()=>{
+  const row=btn.closest('.cs-exp');
+  row.classList.toggle('open');
+  setTimeout(refit,30);
+});
 </script>
+<style>#to-desktop{display:none;position:fixed;top:16px;right:16px;z-index:9999;gap:2px;padding:4px;background:rgba(7,30,32,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);border-radius:100px;font-family:'IBM Plex Sans',system-ui,sans-serif}
+#to-desktop a,#to-desktop span{padding:7px 16px;border-radius:100px;font-size:13px;font-weight:600;letter-spacing:.3px;color:#9DBAB5;text-decoration:none}
+#to-desktop span{background:#E3A72F;color:#0D3B3E}#to-desktop a:hover{color:#fff}
+@media(min-width:769px){#to-desktop.top{display:flex}}</style>
+<nav id="to-desktop" aria-label="Choose view"><a href="/rafeeq">Desktop</a><span>Phone view</span></nav>
+<script>if(window.top===window.self){document.getElementById('to-desktop').classList.add('top');}</script>
 </body>
 </html>
